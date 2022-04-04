@@ -21,6 +21,31 @@ body {
     width: fit-content;
 }
 
+/* Logo */
+
+#logo img {
+    height: 81px;
+    width: 81px;
+    border-radius: 50%;
+}
+
+/* Buttons */
+
+.btn {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn:hover {
+    background-color: white;
+    color: #007bff;
+}
+
+.btn:active {
+    background-color: #007bff;
+    color: white;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
