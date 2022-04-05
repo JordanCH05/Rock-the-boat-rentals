@@ -45,7 +45,6 @@
                     <span id="logo"><img src="/media/Rock_the_boat_logo.png" alt=""></span>
                     <span id="logo-text" class="text-white">Rock The Boat Rentals</span>
                 </a>
-                
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
                 <form action="" method="get">
@@ -100,57 +99,13 @@
                 </ul>
             </div>
         </div>
-        <div class="row bg-white text-center">
+        <div class="row bg-lg-white bg-primary">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="main-nav">
-                    <ul class="navbar-nav w-auto mx-auto">
-                        <li class="nav-item d-block d-md-none">
-                            <a class="logo-font font-weight-bold nav-link  mx-5" href="{% url 'home' %}" id="home-link">
-                                Home
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="logo-font font-weight-bold nav-link  mx-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Ships
-                            </a>
-                            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                                <a href="" class="dropdown-item">Cargo</a>
-                                <a href="" class="dropdown-item ">Passenger</a>
-                                <a href="" class="dropdown-item ">Fishing</a>
-                                <a href="" class="dropdown-item ">Traditional</a>
-                                <a href="" class="dropdown-item">All Ships</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="logo-font font-weight-bold nav-link  mx-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                All Products
-                            </a>
-                            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                                <a href="" class="dropdown-item">By Price</a>
-                                <a href="" class="dropdown-item ">By Rating</a>
-                                <a href="" class="dropdown-item ">By Category</a>
-                                <a href="" class="dropdown-item">All Vessels</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="logo-font font-weight-bold nav-link  mx-5" href="#" id="all-products-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Boats
-                            </a>
-                            <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                                <a href="" class="dropdown-item">Row Boat</a>
-                                <a href="" class="dropdown-item ">Sail Boat</a>
-                                <a href="" class="dropdown-item ">Fishing Boat</a>
-                                <a href="" class="dropdown-item ">Paddle Boat</a>
-                                <a href="" class="dropdown-item ">Hovercraft</a>
-                                <a href="" class="dropdown-item ">Cannal Boat</a>
-                                <a href="" class="dropdown-item">All Boats</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                {% include 'includes/mobile-header.html' %}
+                {% include 'includes/main-nav.html' %}
               </nav>
         </div>
         <div class="row text-center">Banner</div>
