@@ -31,7 +31,7 @@ body {
 
 /* Buttons */
 
-.btn {
+.btn, .btn:active {
     background-color: #007bff;
     color: white;
 }
@@ -41,8 +41,7 @@ body {
     color: #007bff;
 }
 
-.btn:active {
-    background-color: #007bff;
+.nav-link {
     color: white;
 }
 
@@ -56,8 +55,12 @@ body {
   }
 
 /* fixed top navbar only on medium and up */
-@media (min-width: 992px) {
+@media (min-width: 999px) {
     .header-container {
         padding-top: 164px;
+    }
+
+    .bg-lg-white {
+        background-color: white!important;
     }
 }
