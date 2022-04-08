@@ -12,11 +12,77 @@
 
 
 {% block content %}
+    <div class="overlay"></div>
     <div class="container header-container">
         <div class="row">
-            <div class="col">
-                {{ boats }}
+            <div class="col text-center mt-3">
+                <h2>Boats</h2>
+                <hr class="w-50 mb-1">
             </div>
         </div>
+        <div class="row">
+            <div class="product-container col-10 offset-1">
+                <div class="row mt-1 mb-2"></div>
+                <div class="row">
+                    {% for boat in boats %}
+                        <div class="col-3">
+                            <div class="card border-0">
+                                <div class="card-body pb-0">
+                                    <p>{{ boat.sku }}</p>
+                                </div>
+                                <div class="card-footer bg-white pt-0 border-0 text-left">
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="lead mb-0 text-left font-weight-bold">
+                                                {% if boat.currency == 'EUR' %}
+                                                    €{{ boat.price }}
+                                                {% elif boat.currency == 'GBP' %}
+                                                    £{{ boat.price }}
+                                                {% elif boat.currency == 'DKK' %}
+                                                    {{ boat.price }} kr.
+                                                {% else %}
+                                                    {{ boat.currency }}{{ boat.price }}
+                                                {% endif %}
+                                            </p>
+                                            {% if boat.category %}
+                                            <p class="small mt-1 mb-0">
+                                                {% for category in boat.category.all %}
+                                                    <a class="text-muted" href="">
+                                                        <i class="fas fa-tag mr-1"></i>{{ category.friendly_name }}
+                                                    </a>
+                                                {% endfor %}
+                                            </p>
+                                            {% endif %}
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.number_of_views }}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% if boats.has_other_pages %}
+            <ul class="pagination">
+                {% if boats.has_previous %}
+                    <li><a href="?page={{ boats.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in boats.paginator.page_range %}
+                {% if boats.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+                {% if boats.has_next %}
+                    <li><a href="?page={{ boats.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+            </ul>
+        {% endif %}
     </div>
 {% endblock %}
