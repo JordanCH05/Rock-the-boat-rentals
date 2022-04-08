@@ -18,6 +18,7 @@ class Category(models.Model):
 
 class Boat(models.Model):
 
+    sku = models.CharField(max_length=10, unique=True, null=True, blank=True)
     currency = models.CharField(max_length=3)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ManyToManyField(Category, blank=True)
@@ -29,7 +30,7 @@ class Boat(models.Model):
     width = models.DecimalField(max_digits=5, decimal_places=2)
     material = models.CharField(max_length=254, null=True, blank=True)
     location = models.CharField(max_length=254, null=True, blank=True)
-    number_of_views_last_7_days = models.IntegerField(null=True, blank=True)
+    number_of_views = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.pk
+        return self.sku
