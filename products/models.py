@@ -26,8 +26,10 @@ class Boat(models.Model):
     condition = models.CharField(max_length=254, null=True, blank=True)
     fuel = models.CharField(max_length=254, null=True, blank=True)
     year_built = models.IntegerField(null=True, blank=True)
-    length = models.DecimalField(max_digits=5, decimal_places=2)
-    width = models.DecimalField(max_digits=5, decimal_places=2)
+    length = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
+    width = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
     material = models.CharField(max_length=254, null=True, blank=True)
     location = models.CharField(max_length=254, null=True, blank=True)
     number_of_views = models.IntegerField(null=True, blank=True)
