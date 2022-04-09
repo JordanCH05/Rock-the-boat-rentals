@@ -63,26 +63,41 @@
                 </div>
             </div>
         </div>
-        {% if boats.has_other_pages %}
-            <ul class="pagination">
-                {% if boats.has_previous %}
-                    <li><a href="?page={{ boats.previous_page_number }}">&laquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
-                {% for i in boats.paginator.page_range %}
-                {% if boats.number == i %}
-                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                {% else %}
-                    <li><a href="?page={{ i }}">{{ i }}</a></li>
-                {% endif %}
-                {% endfor %}
-                {% if boats.has_next %}
-                    <li><a href="?page={{ boats.next_page_number }}">&raquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
-            </ul>
-        {% endif %}
+        <div class="row">
+            <div class="col-10">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if boats.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link"  href="?page=1">
+                                    <span aria-hidden="true">&laquo</span> First
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link"  href="?page={{ boats.previous_page_number }}">Previous</a>
+                            </li>
+                        {% endif %}
+                        {% for i in nums %}
+                            
+                            <li class="page-item {% if forloop.counter == boats.number %}disabled{% endif %}{% if forloop.counter not in page_range %}d-none{% endif %}">
+                                <a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a>
+                            </li>
+
+                        {% endfor %}
+                        {% if boats.has_next %}
+                            <li class="page-item">
+                                <a class="page-link"  href="?page={{ boats.next_page_number }}">Next</a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link"  href="?page={{ boats.paginator.num_pages }}">
+                                    Last <span aria-hidden="true">&raquo</span>
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            
+        </div>
     </div>
 {% endblock %}
