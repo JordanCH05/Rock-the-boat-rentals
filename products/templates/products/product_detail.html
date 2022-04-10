@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
+                <div class="image-container my-5">
+                    {% if boat.image %}
+                        <a href="">
+                            <img class="card-img-top img-fluid" src="" alt="{{ boat.sku }}">
+                        </a>
+                    {% else %}
+                        <a href="">
+                            {% if boat.category %}
+                                {% for category in boat.category.all %}
+                                    {% if forloop.counter == 1 %}
+                                        <img class="card-img-top img-fluid" src="/media/default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div>
+                    {% if request.user.is_superuser %}
+                        <p>{{ boat.sku }}</p>
+                    {% endif %}
+                    <p class="lead mb-0 text-left font-weight-bold">
+                        {% if boat.currency == 'EUR' %}
+                            €{{ boat.price }}
+                        {% elif boat.currency == 'GBP' %}
+                            £{{ boat.price }}
+                        {% elif boat.currency == 'DKK' %}
+                            {{ boat.price }} kr.
+                        {% else %}
+                            {{ boat.currency }}{{ boat.price }}
+                        {% endif %}
+                    </p>
+                    {% if boat.category %}
+                    <p class="small mt-1 mb-0">
+                        {% for category in boat.category.all %}
+                            <a class="text-muted" href="">
+                                <i class="fas fa-tag mr-1"></i>{{ category.friendly_name }}
+                            </a>
+                        {% endfor %}
+                    </p>
+                    {% endif %}
+                    <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.number_of_views }}</small>
+                    <p>manufacturer: {{ boat.manufacturer }}</p>
+                    <p>condition: {{ boat.condition }}</p>
+                    <p>fuel: {{ boat.fuel }}</p>
+                    <p>year_built: {{ boat.year_built }}</p>
+                    <p>length: {{ boat.length }}</p>
+                    <p>width: {{ boat.width }}</p>
+                    <p>material: {{ boat.material }}</p>
+                    <p>location: {{ boat.location }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

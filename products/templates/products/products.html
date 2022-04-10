@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block page_hedader %}
+{% block page_header %}
     <div class="container header-container">
         <div class="row">
             <div class="col"></div>
@@ -29,11 +29,11 @@
                             <div class="card border-0">
                                 <div class="card-body pb-0">
                                     {% if boat.image %}
-                                        <a href="">
+                                        <a href="{% url 'product_detail' boat.id %}">
                                             <img class="card-img-top img-fluid" src="" alt="{{ boat.sku }}">
                                         </a>
                                     {% else %}
-                                        <a href="">
+                                        <a href="{% url 'product_detail' boat.id %}">
                                             {% if boat.category %}
                                                 {% for category in boat.category.all %}
                                                     {% if forloop.counter == 1 %}
