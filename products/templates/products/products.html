@@ -28,7 +28,21 @@
                         <div class="col-3">
                             <div class="card border-0">
                                 <div class="card-body pb-0">
-                                    <p>{{ boat.sku }}</p>
+                                    {% if boat.image %}
+                                        <a href="">
+                                            <img class="card-img-top img-fluid" src="" alt="{{ boat.sku }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="">
+                                            {% if boat.category %}
+                                                {% for category in boat.category.all %}
+                                                    {% if forloop.counter == 1 %}
+                                                        <img class="card-img-top img-fluid" src="/media/default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                        </a>
+                                    {% endif %}
                                 </div>
                                 <div class="card-footer bg-white pt-0 border-0 text-left">
                                     <div class="row">
