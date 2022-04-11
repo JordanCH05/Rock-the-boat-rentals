@@ -12,6 +12,7 @@ def all_products(request):
 
     query = None
     category = None
+    cur_category = None
     boat_list = Boat.objects.all()
 
     if request.GET:
@@ -62,7 +63,7 @@ def all_products(request):
     except PageNotAnInteger:
         print('NOT AN INTEGER')
         boats = paginator.get_page(1)
-        
+
     except EmptyPage:
         print('empty')
         boats = paginator.get_page(paginator.num_pages)
