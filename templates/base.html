@@ -47,9 +47,9 @@
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form action="" method="get">
+                <form action="{% url 'products' %}" method="get">
                     <div class="input-group w-100">
-                        <input type="text" name="q" placeholder="Search the seven seas" class="form-control border border-white rounded-0">
+                        <input type="text" name="q" placeholder="Search the seven seas" value="{{ request.GET.q }}" class="form-control border border-white rounded-0">
                         <div class="input-group-append">
                             <button class="form-control btn border-white rounded-0">
                                 <span class="icon">
