@@ -35,4 +35,4 @@ class Boat(models.Model):
     number_of_views = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
-        return self.sku
+        return str(self.sku)

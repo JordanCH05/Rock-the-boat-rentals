@@ -86,27 +86,27 @@
                     <ul class="pagination justify-content-center">
                         {% if boats.has_previous %}
                             <li class="page-item">
-                                <a class="page-link"  href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                <a class="page-link"  href="?page=1{{ page_url }}">
                                     <span aria-hidden="true">&laquo</span> First
                                 </a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link"  href="?page={{ boats.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Previous</a>
+                                <a class="page-link"  href="?page={{ boats.previous_page_number }}{{ page_url }}">Previous</a>
                             </li>
                         {% endif %}
                         {% for i in nums %}
                             
                             <li class="page-item {% if forloop.counter == boats.number %}disabled{% endif %}{% if forloop.counter not in page_range %}d-none{% endif %}">
-                                <a class="page-link" href="?page={{ forloop.counter }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">{{ forloop.counter }}</a>
+                                <a class="page-link" href="?page={{ forloop.counter }}{{ page_url }}">{{ forloop.counter }}</a>
                             </li>
 
                         {% endfor %}
                         {% if boats.has_next %}
                             <li class="page-item">
-                                <a class="page-link"  href="?page={{ boats.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">Next</a>
+                                <a class="page-link"  href="?page={{ boats.next_page_number }}{{ page_url }}">Next</a>
                             </li>
                             <li class="page-item">
-                                <a class="page-link"  href="?page={{ boats.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                <a class="page-link"  href="?page={{ boats.paginator.num_pages }}{{ page_url }}">
                                     Last <span aria-hidden="true">&raquo</span>
                                 </a>
                             </li>

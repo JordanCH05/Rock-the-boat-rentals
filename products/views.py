@@ -13,46 +13,59 @@ def all_products(request):
     query = None
     category = None
     cur_category = None
+    sort = None
+    direction = None
+    page_url = ''
     boat_list = Boat.objects.all()
 
     if request.GET:
 
+        if 'sort' in request.GET:
+            sortkey = request.GET['sort']
+            sort = sortkey
+            if 'direction' in request.GET:
+                direction = request.GET['direction']
+                if direction == 'desc':
+                    sort = f'-{sort}'
+            boat_list = boat_list.order_by(sort)
+            page_url += f'&sort={sortkey}&direction={direction}'
+
         if 'category' in request.GET:
             category = request.GET['category']
-            if category is not None:
-                boat_list = boat_list.filter(category__name=category)
-                cur_category = Category.objects.filter(name=category)
-                print(cur_category)
+            boat_list = boat_list.filter(category__name=category)
+            cur_category = Category.objects.filter(name=category)
+            page_url += f'&category={category}'
 
         if 'q' in request.GET:
-            query = request.GET['q']
-            if query is not None:
-                if not query:
-                    messages.error(
-                        request, "You didn't enter any search criteria!"
-                        )
-                    return redirect(reverse('products'))
+            q_terms = request.GET['q']
+            query = q_terms
+            if not query:
+                messages.error(
+                    request, "You didn't enter any search criteria!"
+                    )
+                return redirect(reverse('products'))
 
-                query = query.split(' ')
+            query = query.split(' ')
 
-                queries = []
+            queries = []
 
-                for term in query:
+            for term in query:
 
-                    q = (Q(category__name__icontains=term) |
-                         Q(manufacturer__icontains=term) |
-                         Q(condition__icontains=term) |
-                         Q(fuel__icontains=term) |
-                         Q(year_built__icontains=term) |
-                         Q(material__icontains=term) |
-                         Q(location__icontains=term)
-                         )
+                q = (Q(category__name__icontains=term) |
+                     Q(manufacturer__icontains=term) |
+                     Q(condition__icontains=term) |
+                     Q(fuel__icontains=term) |
+                     Q(year_built__icontains=term) |
+                     Q(material__icontains=term) |
+                     Q(location__icontains=term)
+                     )
 
-                    queries.append(q)
+                queries.append(q)
 
-                queries = reduce(operator.and_, queries)
+            queries = reduce(operator.and_, queries)
 
-                boat_list = boat_list.filter(queries)
+            boat_list = boat_list.filter(queries)
+            page_url += f'&q={q_terms}'
 
     paginator = Paginator(boat_list, 40)
 
@@ -73,12 +86,16 @@ def all_products(request):
     page_max = boats.number + 5
     page_range = range(page_min, page_max)
 
+    cur_sort = f'{sort}_{direction}'
+
     context = {
         'boats': boats,
         'nums': nums,
         'page_range': page_range,
         'search_term': query,
         'current_category': cur_category,
+        'current_sort': cur_sort,
+        'page_url': page_url,
     }
 
     return render(request, 'products/products.html', context)
