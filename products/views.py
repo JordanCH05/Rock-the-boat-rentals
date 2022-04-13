@@ -11,9 +11,11 @@ def all_products(request):
     """ A view to show all boats """
 
     query = None
+    q_terms = None
     category = None
     cur_category = None
     sort = None
+    sortkey = None
     direction = None
     page_url = ''
     boat_list = Boat.objects.all()
@@ -23,6 +25,8 @@ def all_products(request):
         if 'sort' in request.GET:
             sortkey = request.GET['sort']
             sort = sortkey
+            if sortkey == 'category':
+                sort = 'category__name'
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
@@ -86,13 +90,13 @@ def all_products(request):
     page_max = boats.number + 5
     page_range = range(page_min, page_max)
 
-    cur_sort = f'{sort}_{direction}'
+    cur_sort = f'{sortkey}_{direction}'
 
     context = {
         'boats': boats,
         'nums': nums,
         'page_range': page_range,
-        'search_term': query,
+        'search_terms': q_terms,
         'current_category': cur_category,
         'current_sort': cur_sort,
         'page_url': page_url,

@@ -24,11 +24,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="product-container col-10 offset-1">
-                <div class="row mt-1 mb-2"></div>
+            <div class="col-10 col-md-12 offset-1 offset-md-0">
+                <div class="row mt-1 mb-2">
+                    <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                        <div class="w-50">
+                            <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sort != 'None_None' %}info{% else %}black{% endif %}">
+                                <option value="reset" {% if current_sort == 'None_None' %}selected{% endif %}>Sort by...</option>
+                                <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
+                                <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
+                                <option value="number_of_views_asc" {% if current_sort == 'number_of_views_asc' %}selected{% endif %}>Views (low to high)</option>
+                                <option value="number_of_views_desc" {% if current_sort == 'number_of_views_desc' %}selected{% endif %}>Views (high to low)</option>
+                                <option value="length_asc" {% if current_sort == 'length_asc' %}selected{% endif %}>Size (low to high)</option>
+                                <option value="length_desc" {% if current_sort == 'length_desc' %}selected{% endif %}>Size (high to low)</option>
+                                <option value="category_asc" {% if current_sort == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
+                                <option value="category_desc" {% if current_sort == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 order-md-first">
+                        <p class="text-muted mt-3 text-center text-md-left">
+                            {% if search_term or current_category or current_sort != 'None_None' %}
+                                <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
+                            {% endif %}
+                            {{ nums|length }} Pages{% if search_terms %} found for <strong>"{{ search_terms }}"</strong>{% endif %}
+                        </p>
+                    </div>
+                </div>
                 <div class="row">
                     {% for boat in boats %}
-                        <div class="col-3">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
                             <div class="card border-0 h-100">
                                 <div class="card-body pb-0 d-flex flex-column position-relative">
                                     {% if boat.image %}
