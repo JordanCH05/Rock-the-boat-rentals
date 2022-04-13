@@ -5,7 +5,7 @@ html {
 body {
     background: url('/media/katherine-mccormack-unsplash.jpg') no-repeat center center fixed;
     background-size: cover;
-    height: calc(100vh - 164px);
+    height: calc(100vh - 205px);
 }
 
 /* from Bulma */
@@ -67,7 +67,7 @@ body {
 /* fixed top navbar only on medium and up */
 @media (min-width: 999px) {
     .header-container {
-        padding-top: 164px;
+        padding-top: 205px;
     }
 
     .bg-lg-white {
