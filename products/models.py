@@ -37,7 +37,7 @@ class Boat(models.Model):
     image = CloudinaryField('image', null=True, blank=True)
 
     class Meta:
-        ordering = ['-image']
+        ordering = ['-image', '-number_of_views']
 
     def __str__(self):
         return str(self.sku)
