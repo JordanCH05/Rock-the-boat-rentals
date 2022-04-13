@@ -30,7 +30,7 @@
             <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
                 <a href="{% url 'products' %}" class="dropdown-item">All Boats</a>
                 <a href="{% url 'products' %}?sort=price&direction=asc" class="dropdown-item">By Price</a>
-                <a href="{% url 'products' %}?sort=number_of_views&direction=desc" class="dropdown-item ">By Views</a>
+                <a href="{% url 'products' %}?sort=views&direction=desc" class="dropdown-item ">By Views</a>
                 <a href="{% url 'products' %}?sort=category&direction=asc" class="dropdown-item ">By Category</a>
                 <a href="{% url 'products' %}?sort=length&direction=desc" class="dropdown-item ">By Size</a>
             </div>

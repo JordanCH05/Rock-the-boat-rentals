@@ -32,8 +32,8 @@
                                 <option value="reset" {% if current_sort == 'None_None' %}selected{% endif %}>Sort by...</option>
                                 <option value="price_asc" {% if current_sort == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                                 <option value="price_desc" {% if current_sort == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
-                                <option value="number_of_views_asc" {% if current_sort == 'number_of_views_asc' %}selected{% endif %}>Views (low to high)</option>
-                                <option value="number_of_views_desc" {% if current_sort == 'number_of_views_desc' %}selected{% endif %}>Views (high to low)</option>
+                                <option value="views_asc" {% if current_sort == 'views_asc' %}selected{% endif %}>Views (low to high)</option>
+                                <option value="views_desc" {% if current_sort == 'views_desc' %}selected{% endif %}>Views (high to low)</option>
                                 <option value="length_asc" {% if current_sort == 'length_asc' %}selected{% endif %}>Size (low to high)</option>
                                 <option value="length_desc" {% if current_sort == 'length_desc' %}selected{% endif %}>Size (high to low)</option>
                                 <option value="category_asc" {% if current_sort == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
@@ -91,7 +91,7 @@
                                                 {% endfor %}
                                             </p>
                                             {% endif %}
-                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.number_of_views }}</small>
+                                                <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.views }}</small>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-10">
+            <div class="col-12">
                 <nav aria-label="Page navigation">
                     <ul class="pagination justify-content-center">
                         {% if boats.has_previous %}
@@ -138,4 +138,39 @@
             
         </div>
     </div>
+    <div id="top-page-btn" class="btn col-12 border-primary rounded-0">
+        <i class="fas fa-arrow-up mx-auto my-auto py-2"></i>
+    </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+		$('#top-page-btn').click(function(e) {
+			window.scrollTo(0,0)
+		})
+	</script>
+    
+    <script type="text/javascript">
+        $('#sort-selector').change(function() {
+            var selector = $(this);
+            var currentUrl = new URL(window.location);
+
+            var selectedVal = selector.val();
+            if(selectedVal != "reset"){
+                var sort = selectedVal.split("_")[0]
+                var direction = selectedVal.split("_")[1]
+
+                currentUrl.searchParams.set("sort", sort);
+                currentUrl.searchParams.set("direction", direction);
+
+                window.location.replace(currentUrl);
+            } else {
+                currentUrl.searchParams.delete("sort");
+                currentUrl.searchParams.delete("direction");
+
+                window.location.replace(currentUrl);
+            }
+        })
+    </script>
 {% endblock %}
