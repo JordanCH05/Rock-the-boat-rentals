@@ -11,7 +11,22 @@ class BoatAdmin(admin.ModelAdmin):
         'location',
         'fuel',
         'condition',
+        'image',
+        'length',
     )
+    list_filter = (
+        ('image', admin.BooleanFieldListFilter),
+        'category',
+        )
+
+    search_fields = [
+        'sku',
+        'manufacturer',
+        'year_built',
+        'location',
+        'fuel',
+        'condition',
+        ]
 
     ordering = ('sku',)
 

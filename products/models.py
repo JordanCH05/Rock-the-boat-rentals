@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -33,6 +34,10 @@ class Boat(models.Model):
     material = models.CharField(max_length=254, null=True, blank=True)
     location = models.CharField(max_length=254, null=True, blank=True)
     number_of_views = models.IntegerField(null=True, blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
+
+    class Meta:
+        ordering = ['-image']
 
     def __str__(self):
         return str(self.sku)
