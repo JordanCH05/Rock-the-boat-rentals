@@ -51,7 +51,7 @@
                     {% if boat.category %}
                     <p class="small mt-1 mb-0">
                         {% for category in boat.category.all %}
-                            <a class="text-muted" href="">
+                            <a class="text-muted" href="{% url 'products' %}?category={{ category.name }}">
                                 <i class="fas fa-tag mr-1"></i>{{ category.friendly_name }}
                             </a>
                         {% endfor %}
