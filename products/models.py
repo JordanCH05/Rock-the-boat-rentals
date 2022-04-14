@@ -33,7 +33,7 @@ class Boat(models.Model):
         max_digits=5, decimal_places=2, null=True, blank=True)
     material = models.CharField(max_length=254, null=True, blank=True)
     location = models.CharField(max_length=254, null=True, blank=True)
-    views = models.IntegerField(null=True, blank=True)
+    views = models.IntegerField(default= 0, null=True, blank=True)
     image = CloudinaryField('image', null=True, blank=True)
 
     class Meta:

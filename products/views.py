@@ -2,7 +2,8 @@ import operator
 from functools import reduce
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.db.models import Q
+from django.db import transaction
+from django.db.models import Q, F
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Boat, Category
 
@@ -82,7 +83,7 @@ def all_products(request):
         boats = paginator.get_page(1)
 
     except EmptyPage:
-        print('empty')
+        print('Page is empty, showing last non-empty page')
         boats = paginator.get_page(paginator.num_pages)
 
     nums = "a" * boats.paginator.num_pages
@@ -105,10 +106,20 @@ def all_products(request):
     return render(request, 'products/products.html', context)
 
 
+@transaction.atomic
+def increment_views(boat_id):
+    counter = (Boat.objects
+               .select_for_update()
+               .get_or_create(pk=boat_id))[0]
+    counter.views += 1
+    counter.save()
+
+
 def product_detail(request, boat_id):
     """ A view to show individual boat details """
 
     boat = get_object_or_404(Boat, pk=boat_id)
+    increment_views(boat_id)
 
     context = {
         'boat': boat
