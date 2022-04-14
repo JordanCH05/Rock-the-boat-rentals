@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
+{% load currency %}
+{% load divide %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -38,14 +40,12 @@
                         <p>{{ boat.sku }}</p>
                     {% endif %}
                     <p class="lead mb-0 text-left font-weight-bold">
-                        {% if boat.currency == 'EUR' %}
-                            €{{ boat.price }}
-                        {% elif boat.currency == 'GBP' %}
-                            £{{ boat.price }}
-                        {% elif boat.currency == 'DKK' %}
-                            {{ boat.price }} kr.
+                        {% divide factor boat.currency.factor as converter %}
+                        {% multiply boat.price converter as price %}
+                        {% if current_cur in suffix_cur %}
+                            {{ price|floatformat:"2" }} {{ symbol }}
                         {% else %}
-                            {{ boat.currency }}{{ boat.price }}
+                            {{ symbol }}{{ price|floatformat:"2" }}
                         {% endif %}
                     </p>
                     {% if boat.category %}

@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.humanize',
     'cloudinary',
+    'currencies',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -74,9 +76,12 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # require by allauth
+                'django.template.context_processors.request',  # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'currencies.context_processors.currencies',  # required by currencies
+                'bag.contexts.bag_contents',
+                'bag.contexts.currencies',
             ],
         },
     },
@@ -166,3 +171,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+FREE_SHIPPING_THRESHOLD = 100000
+STANDARD_SHIPPING_PERCENTAGE = 10
+
+DEFAULT_CURRENCY = 'EUR'

@@ -17,6 +17,7 @@ class BoatAdmin(admin.ModelAdmin):
     list_filter = (
         ('image', admin.BooleanFieldListFilter),
         'category',
+        'currency',
         )
 
     search_fields = [
