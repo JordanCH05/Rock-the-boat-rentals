@@ -134,7 +134,11 @@
         </div>
         <div class="row text-center">
             <div class="col bg-dark text-white">
-                <h4>Free shipping on orders over €{{ free_shipping_threshold|intcomma }}!</h4>
+                {% if current_cur in suffix_cur %}
+                    <h4>Free shipping on orders over {{ free_shipping_threshold|floatformat:"2"|intcomma }} {{ symbol }}!</h4>
+                {% else %}
+                    <h4>Free shipping on orders over {{ symbol }}{{ free_shipping_threshold|floatformat:"2"|intcomma }}!</h4>
+                {% endif %}
             </div>
         </div>
     </header>

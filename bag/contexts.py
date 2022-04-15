@@ -37,9 +37,11 @@ def bag_and_currencies(request):
         total += price
         fleet_items.append(boat)
 
-    if total < settings.FREE_SHIPPING_THRESHOLD:
+    shipping_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
+
+    if total < shipping_threshold:
         shipping = total * Decimal(settings.STANDARD_SHIPPING_PERCENTAGE/100)
-        free_shipping_delta = settings.FREE_SHIPPING_THRESHOLD - total
+        free_shipping_delta = shipping_threshold - total
     else:
         shipping = 0
         free_shipping_delta = 0
@@ -51,7 +53,7 @@ def bag_and_currencies(request):
         'product_count': product_count,
         'shipping': shipping,
         'free_shipping_delta': free_shipping_delta,
-        'free_shipping_threshold': settings.FREE_SHIPPING_THRESHOLD,
+        'free_shipping_threshold': shipping_threshold,
         'grand_total': grand_total,
         'fleet_items': fleet_items,
         'suffix_cur': suffix_cur,
