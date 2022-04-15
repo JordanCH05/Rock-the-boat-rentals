@@ -22,9 +22,9 @@
     <row class="col">
         <div class="row">
             <div class="col">
-                {% if bag_items %}
-                    <div>
-                        Bag Items
+                {% if fleet_items %}
+                    <div class="table-responsive rounded">
+                        {{ fleet_items }}
                     </div>
                 {% else %}
                     <p>Your Fleet is empty</p>

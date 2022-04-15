@@ -80,8 +80,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'currencies.context_processors.currencies',  # required by currencies
-                'bag.contexts.bag_contents',
-                'bag.contexts.currencies',
+                'bag.contexts.bag_and_currencies',
             ],
         },
     },
