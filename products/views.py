@@ -120,9 +120,17 @@ def product_detail(request, boat_id):
 
     boat = get_object_or_404(Boat, pk=boat_id)
     increment_views(boat_id)
+    in_fleet = False
+
+    fleet = request.session.get('fleet', [])
+    if boat.sku in fleet:
+        print('Already in fleet')
+        in_fleet = True
+    
 
     context = {
-        'boat': boat
+        'boat': boat,
+        'in_fleet': in_fleet,
     }
 
     return render(request, 'products/product_detail.html', context)
