@@ -35,9 +35,7 @@ def bag_and_currencies(request):
         converter = factor/divisor
         price = price * converter
         total += price
-        fleet_items.append({
-            'boat': boat,
-        })
+        fleet_items.append(boat)
 
     if total < settings.FREE_SHIPPING_THRESHOLD:
         shipping = total * Decimal(settings.STANDARD_SHIPPING_PERCENTAGE/100)

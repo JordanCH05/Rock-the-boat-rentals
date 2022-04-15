@@ -1,5 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load currency %}
+{% load divide %}
+{% load humanize %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -24,10 +27,84 @@
             <div class="col">
                 {% if fleet_items %}
                     <div class="table-responsive rounded">
-                        {{ fleet_items }}
+                        <table class="table table-borderless table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Boat Info</th>
+                                    <th></th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            {% for boat in fleet_items %}
+                                <tr>
+                                    <td class="p-3 w-25">
+                                        {% if boat.image %}
+                                            <a href="{{ boat.image.url }}">
+                                                <img class="img-fluid" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
+                                            </a>
+                                        {% else %}
+                                            <a href="">
+                                                {% if boat.category %}
+                                                    {% for category in boat.category.all %}
+                                                        {% if forloop.counter == 1 %}
+                                                            <img class="img-fluid" src="/media/default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="py-3">
+                                        <p><strong>{{ boat.sku }}</strong></p>
+                                        <p>manufacturer: {{ boat.manufacturer }}</p>
+                                        <p>condition: {{ boat.condition }}</p>
+                                        <p>fuel: {{ boat.fuel }}</p>
+                                        <p>year_built: {{ boat.year_built }}</p>
+                                        <p>length: {{ boat.length }}m</p>
+                                        <p>width: {{ boat.width }}m</p>
+                                        <p>material: {{ boat.material }}</p>
+                                        <p>location: {{ boat.location }}</p>
+                                    </td>
+                                    <td>
+                                        {% divide factor boat.currency.factor as converter %}
+                                        {% multiply boat.price converter as price %}
+                                        {% if current_cur in suffix_cur %}
+                                            <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
+                                        {% else %}
+                                            <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
                     </div>
+
+                    
+                    <tr>
+                        <td>
+                            {% if current_cur in suffix_cur %}
+                                <h6><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></h6>
+                                <h6>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</h6>
+                                <h4 class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></h4>
+                                {% if free_shipping_delta > 0 %}
+                                    <p class="mb-1 text-danger">
+                                        You could get free shipping by spending just <strong>{{ free_shipping_delta|intcomma }} {{ symbol }}</strong> more!
+                                    </p>
+                                {% endif %}
+                            {% else %}
+                                <h6><strong>Total Price: {{ symbol }}{{ total|floatformat:2|intcomma }}</strong></h6>
+                                <h6>Delivery: {{ symbol }}{{ shipping|floatformat:2|intcomma }}</h6>
+                                <h4 class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></h4>
+                                {% if free_shipping_delta > 0 %}
+                                    <p class="mb-1 text-danger">
+                                        You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|intcomma }}</strong> more!
+                                    </p>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
                 {% else %}
-                    <p>Your Fleet is empty</p>
+                    <p>Keep Sailing</p>
                     <a href="{% url 'products' %}" class="btn">
                         Find a Boat to add to your Fleet
                     </a>
