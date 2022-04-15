@@ -31,14 +31,19 @@ body {
 
 /* Buttons */
 
-.btn, .btn:active {
+.btn-primary, .btn-primary:active {
     background-color: #007bff;
     color: white;
 }
 
-.btn:hover {
+.btn-primary:hover {
     background-color: white;
     color: #007bff;
+}
+
+.btn-danger:hover {
+    background-color: white;
+    color: #dc3545;
 }
 
 .nav-link {
