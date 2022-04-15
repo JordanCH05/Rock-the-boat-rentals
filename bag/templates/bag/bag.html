@@ -33,6 +33,7 @@
                                     <th>Boat Info</th>
                                     <th></th>
                                     <th>Price</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             {% for boat in fleet_items %}
@@ -74,6 +75,9 @@
                                             <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
                                         {% endif %}
                                     </td>
+                                    <td>
+                                        <button class="btn btn-danger remove-item float-right" id="remove_{{ boat }}"><small>Remove</small></button>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </table>
@@ -110,4 +114,22 @@
                     </a>
                 {% endif %}
     </row>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+    <script type="text/javascript">
+        // Remove item and relaod on click
+    $('.remove-item').click(function(e) {
+        var csrfToken = "{{ csrf_token }}";
+        var itemId = $(this).attr('id').split('remove_')[1];
+        var url = `/bag/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken};
+
+        $.post(url, data)
+         .done(function() {
+             location.reload();
+         }) 
+    });
+    </script>
 {% endblock %}
