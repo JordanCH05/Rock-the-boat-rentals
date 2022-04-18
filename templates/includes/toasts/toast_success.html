@@ -1,0 +1,43 @@
+{% load humanize %}
+
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="false">
+    <div class="w-100 bg-success toast-capper"></div>
+    <div class="toast-header bg-white text-dark">
+      <strong class="mr-auto">Success!</strong>
+      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="toast-body bg-white">
+      <div class="row">
+        <div class="col">
+          {{ message }}
+          <hr>
+        </div>
+      </div>
+      {% if fleet_items %}
+        {% if current_cur in suffix_cur %}
+            <p><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></p>
+            <p>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</p>
+            <p class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></p>
+            {% if free_shipping_delta > 0 %}
+                <p class="mb-1 text-danger">
+                    You could get free shipping by spending just <strong>{{ free_shipping_delta|intcomma }} {{ symbol }}</strong> more!
+                </p>
+            {% endif %}
+        {% else %}
+            <p><strong>Total Price: {{ symbol }}{{ total|floatformat:2|intcomma }}</strong></p>
+            <p>Delivery: {{ symbol }}{{ shipping|floatformat:2|intcomma }}</p>
+            <p class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></p>
+            {% if free_shipping_delta > 0 %}
+                <p class="mb-1 text-danger">
+                    You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|floatformat:2|intcomma }}</strong> more!
+                </p>
+            {% endif %}
+        {% endif %}
+        <a class="btn btn-primary" href="{% url 'view_bag' %}">View Fleet</a>
+      {% endif %}
+        
+    </div>
+
+</div>

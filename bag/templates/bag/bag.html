@@ -101,15 +101,15 @@
                                 <h4 class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></h4>
                                 {% if free_shipping_delta > 0 %}
                                     <p class="mb-1 text-danger">
-                                        You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|intcomma }}</strong> more!
+                                        You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|floatformat:2|intcomma }}</strong> more!
                                     </p>
                                 {% endif %}
                             {% endif %}
                         </td>
                     </tr>
                 {% else %}
-                    <p>Keep Sailing</p>
-                    <a href="{% url 'products' %}" class="btn">
+                    <p>Your fleet is empty</p>
+                    <a href="{% url 'products' %}" class="btn btn-primary">
                         Find a Boat to add to your Fleet
                     </a>
                 {% endif %}

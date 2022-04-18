@@ -46,7 +46,8 @@ def all_products(request):
             query = q_terms
             if not query:
                 messages.error(
-                    request, "You didn't enter any search criteria!"
+                    request, "Are you as drunk as a sailor? "
+                    "You didn't enter any search criteria!"
                     )
                 return redirect(reverse('products'))
 
@@ -79,11 +80,20 @@ def all_products(request):
     try:
         boats = paginator.page(page)
     except PageNotAnInteger:
-        print('NOT AN INTEGER')
+        if page:
+            messages.warning(
+                request,
+                "Something smells fishy, that page doesn't exist! "
+                "Returning to safe waters"
+                )
         boats = paginator.get_page(1)
 
     except EmptyPage:
-        print('Page is empty, showing last non-empty page')
+        messages.warning(
+            request,
+            "You've sailed too far, that page is empty! "
+            "Returning to safe waters"
+            )
         boats = paginator.get_page(paginator.num_pages)
 
     nums = "a" * boats.paginator.num_pages

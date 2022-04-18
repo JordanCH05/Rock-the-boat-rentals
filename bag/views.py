@@ -15,12 +15,12 @@ def add_to_bag(request, boat):
     fleet = request.session.get('fleet', [])
 
     if boat in fleet:
-        print('Already in fleet')
+        messages.info(request, f'{boat} already in your fleet')
     else:
         fleet.append(boat)
+        messages.success(request, f'Added {boat} to your fleet')
 
     request.session['fleet'] = fleet
-    print(request.session['fleet'])
 
     return redirect(redirect_url)
 
@@ -32,10 +32,10 @@ def remove_from_bag(request, boat):
         fleet = request.session.get('fleet', [])
 
         fleet.remove(boat)
-        messages.success(request, f'Removed {boat} from your bag')
+        messages.success(request, f'Removed {boat} from your fleet')
 
         request.session['fleet'] = fleet
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, f'Error removing item: {e}')
+        messages.error(request, f'Error removing boat: {e}')
         return HttpResponse(status=500)
