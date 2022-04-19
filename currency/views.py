@@ -1,5 +1,4 @@
 from django.shortcuts import HttpResponse, redirect
-from django.contrib import messages
 from currencies.models import Currency
 
 
