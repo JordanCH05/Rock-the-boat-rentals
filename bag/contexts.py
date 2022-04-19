@@ -8,11 +8,7 @@ from products.models import Boat
 def bag_and_currencies(request):
 
     suffix_cur = ['DKK', 'CHF']
-    currency = settings.DEFAULT_CURRENCY
-
-    if request.GET:
-        if 'currency' in request.GET:
-            currency = request.GET['currency']
+    currency = request.session.get('currency', settings.DEFAULT_CURRENCY)
 
     filt_cur = Currency.objects.filter(code=currency).values()[0]
     factor = filt_cur['factor']

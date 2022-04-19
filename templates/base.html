@@ -78,7 +78,7 @@
                         </a>
                         <div class="dropdown-menu border-0" aria-labelledby="currency-options">
                             {% for c in CURRENCIES %}
-                                <option value="{{ c.code }}" class="currency-selector dropdown-item">{{ c.name }} {{ c.symbol }}</a>
+                                <a href="{% url 'change_currency' c.code request.path %}" class="currency-selector dropdown-item">{{ c.name }} {{ c.symbol }}</a>
                             {% endfor %}
                         </div>
                     </li>
@@ -168,7 +168,7 @@
     {% endblock %}
 
     {% block postloadjs %}
-        <script type="text/javascript">
+        <!-- <script type="text/javascript">
             $('.toast').toast('show')
             
             $('.currency-selector').click(function() {
@@ -178,7 +178,7 @@
                 currentUrl.searchParams.set("currency", currency);
                 window.location.replace(currentUrl);
             })
-        </script>
+        </script> -->
     {% endblock %}
     
 </body>
