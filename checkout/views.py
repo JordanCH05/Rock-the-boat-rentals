@@ -1,3 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
+from django.contrib import messages
+from .forms import OrderForm
 
-# Create your views here.
+
+def checkout(request):
+    fleet = request.session.get('fleet', [])
+    if not fleet:
+        messages.error(request, "There's nothing in your fleet at the moment")
+        return redirect(reverse('products'))
+
+    order_form = OrderForm()
+    template = 'checkout/checkout.html'
+    context = {
+        'order_form': order_form,
+    }
+
+    return render(request, template, context)

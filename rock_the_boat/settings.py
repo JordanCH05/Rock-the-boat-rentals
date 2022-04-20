@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'bag',
     'currency',
     'checkout',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'rock_the_boat.urls'
+
+CRISPY_TEMAPLTE_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
@@ -84,6 +87,10 @@ TEMPLATES = [
                 'currencies.context_processors.currencies',  # required by currencies
                 'bag.contexts.bag_and_currencies',
             ],
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+            ]
         },
     },
 ]
