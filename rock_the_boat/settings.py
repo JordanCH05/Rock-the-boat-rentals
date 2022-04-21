@@ -86,7 +86,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'currencies.context_processors.currencies',  # required by currencies
-                'bag.contexts.bag_and_currencies',
+                'bag.contexts.fleet',
+                'currency.contexts.currencies',
             ],
             'builtins': [
                 'crispy_forms.templatetags.crispy_forms_tags',
