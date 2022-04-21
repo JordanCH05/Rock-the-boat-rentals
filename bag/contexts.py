@@ -5,7 +5,7 @@ from products.models import Boat
 from currency.contexts import currencies
 
 
-def fleet(request):
+def fleet_contents(request):
 
     total = 0
     product_count = 0

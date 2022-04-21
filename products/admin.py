@@ -13,6 +13,8 @@ class BoatAdmin(admin.ModelAdmin):
         'condition',
         'image',
         'length',
+        'currency',
+        'price',
     )
     list_filter = (
         ('image', admin.BooleanFieldListFilter),

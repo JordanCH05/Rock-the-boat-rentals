@@ -86,7 +86,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
                 'currencies.context_processors.currencies',  # required by currencies
-                'bag.contexts.fleet',
+                'bag.contexts.fleet_contents',
                 'currency.contexts.currencies',
             ],
             'builtins': [
