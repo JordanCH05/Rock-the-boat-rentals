@@ -32,6 +32,7 @@ def bag_and_currencies(request):
         price = price * converter
         total += price
         fleet_items.append(boat)
+        product_count += 1
 
     shipping_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
 
