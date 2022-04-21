@@ -48,7 +48,7 @@
                                                 {% if boat.category %}
                                                     {% for category in boat.category.all %}
                                                         {% if forloop.counter == 1 %}
-                                                            <img class="img-fluid" src="/media/default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                                            <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}

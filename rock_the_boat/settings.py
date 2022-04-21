@@ -84,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',  # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
                 'currencies.context_processors.currencies',  # required by currencies
                 'bag.contexts.bag_and_currencies',
             ],

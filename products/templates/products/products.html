@@ -63,7 +63,7 @@
                                         {% if boat.category %}
                                             {% for category in boat.category.all %}
                                                 {% if forloop.counter == 1 %}
-                                                    <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="/media/default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                                    <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
                                                 {% endif %}
                                             {% endfor %}
                                         {% endif %}
