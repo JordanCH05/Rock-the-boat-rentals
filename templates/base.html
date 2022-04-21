@@ -110,7 +110,7 @@
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
-                                        {{ symbol }}{{ grand_total|floatformat:2 }}
+                                        {{ symbol }}{{ grand_total|floatformat:2|intcomma }}
                                     {% else %}
                                         {% if current_cur in suffix_cur %}
                                             0.00 {{ symbol }}
@@ -170,17 +170,9 @@
     {% endblock %}
 
     {% block postloadjs %}
-        <!-- <script type="text/javascript">
+        <script type="text/javascript">
             $('.toast').toast('show')
-            
-            $('.currency-selector').click(function() {
-                var currency = $(this).val();
-                var currentUrl = new URL(window.location);
-
-                currentUrl.searchParams.set("currency", currency);
-                window.location.replace(currentUrl);
-            })
-        </script> -->
+        </script>
     {% endblock %}
     
 </body>

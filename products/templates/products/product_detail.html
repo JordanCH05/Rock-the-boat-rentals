@@ -2,6 +2,7 @@
 {% load static %}
 {% load currency %}
 {% load divide %}
+{% load humanize %}
 
 {% block page_header %}
     <div class="container header-container">
@@ -43,9 +44,9 @@
                         {% divide factor boat.currency.factor as converter %}
                         {% multiply boat.price converter as price %}
                         {% if current_cur in suffix_cur %}
-                            {{ price|floatformat:"2" }} {{ symbol }}
+                            {{ price|floatformat:"2"|intcomma }} {{ symbol }}
                         {% else %}
-                            {{ symbol }}{{ price|floatformat:"2" }}
+                            {{ symbol }}{{ price|floatformat:"2"|intcomma }}
                         {% endif %}
                     </p>
                     {% if boat.category %}
