@@ -39,9 +39,9 @@ class Order(models.Model):
         """
         self.order_total = \
             self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
-        if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
+        if self.order_total < settings.FREE_SHIPPING_THRESHOLD:
             self.delivery_cost = \
-                self.order_total * settings.STANDARD_DELIVERY_PERCENTAGE / 100
+                self.order_total * settings.STANDARD_SHIPPING_PERCENTAGE / 100
         else:
             self.delivery_cost = 0
         self.grand_total = self.order_total + self.delivery_cost
@@ -64,7 +64,7 @@ class OrderLineItem(models.Model):
     """ Order Line Item """
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     boat = models.ForeignKey(Boat, null=False, blank=False, on_delete=models.CASCADE)
-    lineitem_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    lineitem_total = models.DecimalField(max_digits=8, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """

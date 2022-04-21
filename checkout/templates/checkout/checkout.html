@@ -132,13 +132,13 @@
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
                     <div class="submit-button text-right mt-5 mb-2">                    
-						<a href="{% url 'view_bag' %}" class="btn btn-outline-black rounded-0">
+						<a href="{% url 'view_bag' %}" class="btn btn-outline-primary rounded-0">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
 							</span>
-							<span class="font-weight-bold">Adjust Bag</span>
+							<span class="font-weight-bold">Adjust Fleet</span>
 						</a>
-						<button id="submit-button" class="btn btn-black rounded-0">
+						<button id="submit-button" class="btn btn-primary rounded-0">
 							<span class="font-weight-bold">Complete Order</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>
@@ -148,7 +148,11 @@
 							<span class="icon">
 								<i class="fas fa-exclamation-circle"></i>
 							</span>
-							<span>Your card will be charged <strong>${{ grand_total|floatformat:2 }}</strong></span>
+                            {% if current_cur in suffix_cur %}
+							    <span>Your card will be charged <strong>{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></span>
+                            {% else %}
+							    <span>Your card will be charged <strong>{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></span>
+                            {% endif %}
 						</p>
 					</div>
                 </form>
