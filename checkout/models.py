@@ -1,9 +1,12 @@
 import uuid
+from decimal import Decimal
+
 from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 # from django_countries.fields import CountryField
 from products.models import Boat
+from currency.contexts import currencies
 
 
 class Order(models.Model):
@@ -65,14 +68,6 @@ class OrderLineItem(models.Model):
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     boat = models.ForeignKey(Boat, null=False, blank=False, on_delete=models.CASCADE)
     lineitem_total = models.DecimalField(max_digits=8, decimal_places=2, null=False, blank=False, editable=False)
-
-    def save(self, *args, **kwargs):
-        """
-        Override the original save method to set the lineitem total
-        and update the order total.
-        """
-        self.lineitem_total = self.boat.price
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'SKU {self.boat.sku} on order {self.order.order_number}'

@@ -76,6 +76,7 @@ def checkout(request):
             order.original_bag = fleet
             order.save()
             for sku in fleet:
+                # Import currency factor here to convert boat price
                 try:
                     boat = Boat.objects.get(sku=sku)
                     order_line_item = OrderLineItem(

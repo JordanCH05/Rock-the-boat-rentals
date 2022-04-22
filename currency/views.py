@@ -5,6 +5,8 @@ from currencies.models import Currency
 
 def change_currency(request, currency, redirect_url=''):
 
+    # If boat in fleet then prevent currency change
+
     redirect_url = '/' + redirect_url
     currencies = []
     filt_cur = Currency.objects.values()

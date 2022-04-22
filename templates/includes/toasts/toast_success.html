@@ -22,7 +22,7 @@
             <p class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></p>
             {% if free_shipping_delta > 0 %}
                 <p class="mb-1 text-danger">
-                    You could get free shipping by spending just <strong>{{ free_shipping_delta|intcomma }} {{ symbol }}</strong> more!
+                    You could get free shipping by spending just <strong>{{ free_shipping_delta|floatformat:2|intcomma }} {{ symbol }}</strong> more!
                 </p>
             {% endif %}
         {% else %}
