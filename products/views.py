@@ -134,7 +134,6 @@ def product_detail(request, boat_id):
 
     fleet = request.session.get('fleet', [])
     if boat.sku in fleet:
-        print('Already in fleet')
         in_fleet = True
 
     context = {

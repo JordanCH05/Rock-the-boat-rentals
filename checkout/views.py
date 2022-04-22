@@ -18,11 +18,12 @@ def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
+        intent = stripe.PaymentIntent.modify(pid, metadata={
             'fleet': json.dumps(request.session.get('fleet', [])),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
+        print(intent)
         return HttpResponse(status=200)
     except Exception as ex:
         messages.error(request, 'Sorry, your payment cannot be \
@@ -70,6 +71,9 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
+            pid = request.POST.get('client_secret').split('_secret')[0]
+            order.stripe_pid = pid
+            order.original_bag = fleet
             order.save()
             for sku in fleet:
                 try:
