@@ -1,5 +1,6 @@
 import stripe
 import json
+from decimal import Decimal
 
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
@@ -10,6 +11,7 @@ from .forms import OrderForm
 from .models import OrderLineItem, Order
 from products.models import Boat
 from bag.contexts import fleet_contents
+from currency.contexts import currencies
 
 
 @require_POST
@@ -23,7 +25,6 @@ def cache_checkout_data(request):
             'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
-        print(intent)
         return HttpResponse(status=200)
     except Exception as ex:
         messages.error(request, 'Sorry, your payment cannot be \
@@ -54,7 +55,8 @@ def checkout(request):
     if request.method == 'POST':
         fleet = request.session.get('fleet', [])
         if not fleet:
-            messages.error(request, "There's nothing in your fleet at the moment")
+            messages.error(request,
+                           "There's nothing in your fleet at the moment")
             return redirect(reverse('products'))
 
         form_data = {
@@ -72,17 +74,23 @@ def checkout(request):
         if order_form.is_valid():
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
+            factor = currencies(request)['factor']
             order.stripe_pid = pid
             order.original_bag = fleet
+            delivery_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
+            order.delivery_threshold = delivery_threshold
             order.save()
             for sku in fleet:
-                # Import currency factor here to convert boat price
                 try:
                     boat = Boat.objects.get(sku=sku)
+                    price = boat.price
+                    divisor = Decimal(boat.currency.factor)
+                    converter = factor/divisor
+                    price = price * converter
                     order_line_item = OrderLineItem(
                         order=order,
                         boat=boat,
-                        lineitem_total=boat.price,
+                        lineitem_total=price,
                     )
                     order_line_item.save()
 
@@ -106,7 +114,7 @@ def checkout(request):
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
-            currency=request.session.get('currency', settings.DEFAULT_CURRENCY),
+            currency=currency,
         )
 
         if not stripe_public_key:
