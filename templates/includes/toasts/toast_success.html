@@ -15,7 +15,7 @@
           <hr>
         </div>
       </div>
-      {% if fleet_items %}
+      {% if fleet_items and not on_profile_page %}
         {% if current_cur in suffix_cur %}
             <p><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></p>
             <p>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</p>
