@@ -154,7 +154,6 @@ def add_product(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Successfully added boat!')
-            return redirect(reverse('add_product'))
         else:
             messages.error(request, 'Failed to add boat.'
                            ' Please ensure the form is valid')
@@ -164,6 +163,33 @@ def add_product(request):
     template = 'products/add_product.html'
     context = {
         'form': form
+    }
+
+    return render(request, template, context)
+
+
+def edit_product(request, boat_id):
+    """ Edit a boat in the store """
+
+    boat = get_object_or_404(Boat, pk=boat_id)
+
+    if request.method == 'POST':
+        form = BoatForm(request.POST, request.FILES, instance=boat)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('product_detail', args=[boat.id]))
+        else:
+            messages.error(request, 'Failed to update product.'
+                           ' Please ensure the form is valid')
+    else:
+        form = BoatForm(instance=boat)
+        messages.info(request, f'You are editing {boat.sku}')
+
+    template = 'products/edit_product.html'
+    context = {
+        'form': form,
+        'boat': boat,
     }
 
     return render(request, template, context)
