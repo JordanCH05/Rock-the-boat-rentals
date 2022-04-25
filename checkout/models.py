@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.conf import settings
 from django_countries.fields import CountryField
 
+from currencies.models import Currency
 from products.models import Boat
 from profiles.models import UserProfile
 
@@ -29,6 +30,10 @@ class Order(models.Model):
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     original_bag = models.TextField(null=False, blank=False, default='')
     stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
+    currency = models.ForeignKey(
+        Currency, default='EUR', on_delete=models.SET_DEFAULT,
+        null=True, blank=True, max_length=3,
+        )
 
     def _generate_order_number(self):
         """

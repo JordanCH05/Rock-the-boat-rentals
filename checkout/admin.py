@@ -24,7 +24,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     fields = (
         'order_number',
-        'userprofile',
+        'user_profile',
         'date',
         'full_name',
         'email',
@@ -38,6 +38,7 @@ class OrderAdmin(admin.ModelAdmin):
         'delivery_cost',
         'order_total',
         'grand_total',
+        'currency',
         'original_bag',
         'stripe_pid',
     )

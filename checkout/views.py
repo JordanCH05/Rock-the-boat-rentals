@@ -9,6 +9,7 @@ from django.conf import settings
 
 from .forms import OrderForm
 from .models import OrderLineItem, Order
+from currencies.models import Currency
 from products.models import Boat
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
@@ -77,6 +78,8 @@ def checkout(request):
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             factor = currencies(request)['factor']
+            cur_currency = Currency.objects.get(code=currency)
+            order.currency = cur_currency
             order.stripe_pid = pid
             order.original_bag = fleet
             delivery_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
