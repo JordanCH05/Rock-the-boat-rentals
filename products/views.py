@@ -6,6 +6,7 @@ from django.db import transaction
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Boat, Category
+from .forms import BoatForm
 
 
 def all_products(request):
@@ -142,3 +143,16 @@ def product_detail(request, boat_id):
     }
 
     return render(request, 'products/product_detail.html', context)
+
+
+def add_product(request):
+    """ Add a product to the store """
+
+    form = BoatForm()
+
+    template = 'products/add_product.html'
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)
