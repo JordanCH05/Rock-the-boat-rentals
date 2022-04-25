@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import Boat, Category
+from .widgets import CustomClearableFileInput
 
 
 class BoatForm(forms.ModelForm):
@@ -9,6 +10,8 @@ class BoatForm(forms.ModelForm):
     class Meta:
         model = Boat
         fields = '__all__'
+
+    image = forms.ImageField(label='Image', required=False, widget=CustomClearableFileInput)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
