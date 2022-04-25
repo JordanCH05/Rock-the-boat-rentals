@@ -124,7 +124,6 @@ def checkout(request):
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
-                print(profile)
                 order_form = OrderForm(initial={
                     'full_name': profile.user.get_full_name(),
                     'email': profile.user.email,
@@ -136,7 +135,6 @@ def checkout(request):
                     'street_address2': profile.default_street_address2,
                     'county': profile.default_county,
                 })
-                print(order_form)
             except UserProfile.DoesNotExist:
                 order_form = OrderForm()
         else:
@@ -146,7 +144,6 @@ def checkout(request):
             messages.warning(request, 'Stripe public key is missing. \
                 Did you forget to set it in your environment?')
 
-        order_form = OrderForm()
         template = 'checkout/checkout.html'
         context = {
             'order_form': order_form,
