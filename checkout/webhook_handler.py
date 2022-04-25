@@ -2,9 +2,13 @@ import json
 import time
 
 from django.http import HttpResponse
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.conf import settings
 
 from products.models import Boat
 from profiles.models import UserProfile
+from currency.contexts import currencies
 from .models import Order, OrderLineItem
 
 
@@ -13,6 +17,27 @@ class StripeWHHandler:
 
     def __init__(self, request):
         self.request = request
+
+    def _send_confirmation_email(self, order, suffix_cur):
+        """ Send the user a confirmation email """
+        cust_email = order.email
+        subject = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_subject.txt',
+            {'order': order})
+        body = render_to_string(
+            'checkout/confirmation_emails/confirmation_email_body.txt',
+            {
+                'order': order,
+                'contact_email': settings.DEFAULT_FROM_EMAIL,
+                'suffix_cur': suffix_cur
+            })
+
+        send_mail(
+            subject,
+            body,
+            settings.DEFAULT_FROM_EMAIL,
+            [cust_email]
+        )
 
     def handle_event(self, event):
         """
@@ -33,6 +58,7 @@ class StripeWHHandler:
         pid = intent.id
         fleet = intent.metadata.fleet
         save_info = intent.metadata.save_info
+        suffix_cur = currencies(self.request)['suffix_cur']
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
@@ -86,6 +112,7 @@ class StripeWHHandler:
                 time.sleep(1)
                 print(f'Attempt: {attempt - 1}')
         if order_exists:
+            self._send_confirmation_email(order, suffix_cur)
             return HttpResponse(
                 content=f'Webhook received: {event["type"]} | '
                 'SUCCESS: Verified order already in database',
@@ -123,6 +150,7 @@ class StripeWHHandler:
                     content=f'Webhook received: {event["type"]} | ERROR: {ex}',
                     status=500
                 )
+        self._send_confirmation_email(order, suffix_cur)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | '
                     'SUCCESS: Created order in webhook',

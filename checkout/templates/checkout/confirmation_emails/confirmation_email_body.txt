@@ -1,0 +1,33 @@
+Hello {{ order.full_name }}!
+
+This is a confirmation of your order at Rock the Boat Revival. Your order information is below:
+
+Order Number: {{ order.order_number }}
+Order Date: {{ order.date }}
+
+{% if order.currency.code in suffix_cur %}
+
+Order Total: {{ order.order_total }} {{ order.currency.symbol }}
+Delivery: {{ order.delivery_cost }} {{ order.currency.symbol }}
+Grand Total: {{ order.grand_total }} {{ order.currency.symbol }}
+
+{% else %}
+
+Order Total: {{ order.currency.symbol }}{{ order.order_total }}
+Delivery: {{ order.currency.symbol }}{{ order.delivery_cost }}
+Grand Total: {{ order.currency.symbol }}{{ order.grand_total }}
+
+{% endif %}
+
+
+Your order will be shipped to {{ order.street_address1 }} in {{ order.town_or_city }}, {{ order.country }}.
+
+We've got your phone number on file as {{ order.phone_number }}.
+
+If you have any questions, feel free to contact us at {{ contact_email }}.
+
+Thank you for your order!
+
+Sincerely,
+
+Rock the Boat Revival
