@@ -28,14 +28,14 @@ class BoatAdmin(admin.ModelAdmin):
 
     search_fields = [
         'sku',
-        'manufacturer',
-        'year_built',
-        'location',
-        'fuel',
-        'condition',
+        'name',
+        'brand',
+        'state_of_assembly',
+        'power_source',
+        'material',
         ]
 
-    ordering = ('sku',)
+    ordering = ('name',)
 
 
 @admin.register(Category)
