@@ -80,10 +80,16 @@
                         <p>width: {{ boat.width }}m</p>
                     {% endif %}
                     {% if boat.material %}
-                    <p>material: {{ boat.material }}</p>
+                        <p>material: {{ boat.material }}</p>
                     {% endif %}
                     {% if boat.location %}
-                    <p>location: {{ boat.location }}</p>
+                        <p>location: {{ boat.location }}</p>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                        <small class="ml-3">
+                            <a href="{% url 'edit_product' boat.id %}">Edit</a> | 
+                            <a class="text-danger" href="{% url 'delete_product' boat.id %}">Delete</a>
+                        </small>
                     {% endif %}
                     
                 </div>

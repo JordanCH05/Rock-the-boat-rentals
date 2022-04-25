@@ -85,6 +85,7 @@
                                                     {{ symbol }}{{ price|floatformat:"2"|intcomma }}
                                                 {% endif %}
                                             </p>
+                                            <p class="lead mb-0 text-left">{{ boat.sku }}</p>
                                             {% if boat.category.all %}
                                             <p class="small mt-1 mb-0">
                                                 {% for category in boat.category.all %}
@@ -95,6 +96,12 @@
                                             </p>
                                             {% endif %}
                                                 <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.views }}</small>
+                                            {% if request.user.is_superuser %}
+                                                <small class="ml-3">
+                                                    <a href="{% url 'edit_product' boat.id %}">Edit</a> | 
+                                                    <a class="text-danger" href="{% url 'delete_product' boat.id %}">Delete</a>
+                                                </small>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>

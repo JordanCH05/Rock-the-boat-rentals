@@ -152,8 +152,9 @@ def add_product(request):
     if request.method == 'POST':
         form = BoatForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            boat = form.save()
             messages.success(request, 'Successfully added boat!')
+            return redirect(reverse('product_detail', args=[boat.id]))
         else:
             messages.error(request, 'Failed to add boat.'
                            ' Please ensure the form is valid')
@@ -193,3 +194,15 @@ def edit_product(request, boat_id):
     }
 
     return render(request, template, context)
+
+
+def delete_product(request, boat_id):
+    """ Delete a product from the store """
+    if not request.user.is_superuser:
+        messages.error(request, 'Sorry, only store owners can do that.')
+        return redirect(reverse('home'))
+
+    boat = get_object_or_404(Boat, pk=boat_id)
+    boat.delete()
+    messages.success(request, 'Boat deleted!')
+    return redirect(reverse('products'))
