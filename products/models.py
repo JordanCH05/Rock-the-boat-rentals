@@ -20,8 +20,8 @@ class Category(models.Model):
 
 class Boat(models.Model):
 
-    sku = models.CharField(max_length=10, unique=True, null=True, blank=True)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    sku = models.CharField(max_length=10, unique=True, default='test')
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ManyToManyField(Category, blank=True)
     manufacturer = models.CharField(max_length=254, null=True, blank=True)
     condition = models.CharField(max_length=254, null=True, blank=True)

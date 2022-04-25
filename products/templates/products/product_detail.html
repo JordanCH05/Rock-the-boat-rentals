@@ -24,12 +24,14 @@
                         </a>
                     {% else %}
                         <a href="">
-                            {% if boat.category %}
+                            {% if boat.category.all %}
                                 {% for category in boat.category.all %}
                                     {% if forloop.counter == 1 %}
                                         <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
                                     {% endif %}
                                 {% endfor %}
+                            {% else %}
+                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default-motor_yacht.png" alt="{{ boat.sku }}">
                             {% endif %}
                         </a>
                     {% endif %}
@@ -49,7 +51,7 @@
                             {{ symbol }}{{ price|floatformat:"2"|intcomma }}
                         {% endif %}
                     </p>
-                    {% if boat.category %}
+                    {% if boat.category.all %}
                     <p class="small mt-1 mb-0">
                         {% for category in boat.category.all %}
                             <a class="text-muted" href="{% url 'products' %}?category={{ category.name }}">
@@ -59,14 +61,31 @@
                     </p>
                     {% endif %}
                     <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.views }}</small>
-                    <p>manufacturer: {{ boat.manufacturer }}</p>
-                    <p>condition: {{ boat.condition }}</p>
-                    <p>fuel: {{ boat.fuel }}</p>
-                    <p>year_built: {{ boat.year_built }}</p>
-                    <p>length: {{ boat.length }}m</p>
-                    <p>width: {{ boat.width }}m</p>
+                    {% if boat.manufacturer %}
+                        <p>manufacturer: {{ boat.manufacturer }}</p>
+                    {% endif %}
+                    {% if boat.condition %}
+                        <p>condition: {{ boat.condition }}</p> 
+                    {% endif %}
+                    {% if boat.fuel %}
+                        <p>fuel: {{ boat.fuel }}</p>
+                    {% endif %}
+                    {% if boat.year_built %}
+                        <p>year_built: {{ boat.year_built }}</p>
+                    {% endif %}
+                    {% if boat.length %}
+                        <p>length: {{ boat.length }}m</p>
+                    {% endif %}
+                    {% if boat.width %}
+                        <p>width: {{ boat.width }}m</p>
+                    {% endif %}
+                    {% if boat.material %}
                     <p>material: {{ boat.material }}</p>
+                    {% endif %}
+                    {% if boat.location %}
                     <p>location: {{ boat.location }}</p>
+                    {% endif %}
+                    
                 </div>
                 <form action="{% url 'add_to_bag' boat.sku %}" class="form" method="POST">
                     {% csrf_token %}

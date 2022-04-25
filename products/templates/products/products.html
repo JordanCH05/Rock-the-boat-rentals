@@ -61,12 +61,14 @@
                                     {% if boat.image %}
                                         <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
                                     {% else %}
-                                        {% if boat.category %}
+                                        {% if boat.category.all %}
                                             {% for category in boat.category.all %}
                                                 {% if forloop.counter == 1 %}
                                                     <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
                                                 {% endif %}
                                             {% endfor %}
+                                        {% else %}
+                                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default-motor_yacht.png" alt="{{ boat.sku }}">
                                         {% endif %}
                                     {% endif %}
                                     <a href="{% url 'product_detail' boat.id %}" class="stretched-link"></a>
@@ -83,7 +85,7 @@
                                                     {{ symbol }}{{ price|floatformat:"2"|intcomma }}
                                                 {% endif %}
                                             </p>
-                                            {% if boat.category %}
+                                            {% if boat.category.all %}
                                             <p class="small mt-1 mb-0">
                                                 {% for category in boat.category.all %}
                                                     <a class="text-muted" href="{% url 'products' %}?category={{ category.name }}">
