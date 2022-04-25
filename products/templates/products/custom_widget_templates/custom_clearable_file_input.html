@@ -1,4 +1,4 @@
-{% if widget.is_initial %}
+{% if widget %}
     <p>{{ widget.initial_text }}:</p> 
     <a href="{{ widget.value.url }}">
         <img src="{{ widget.value.url }}" width="96" height="96" class="rounded shadow-sm">
@@ -12,7 +12,7 @@
     <br>
     {{ widget.input_text }}
 {% endif %}
-<span class="btn btn-outline-dark rounded-0">
-    Select Image <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}"{% include "django/forms/widgets/attrs.html" %}>
+<span class="btn btn-outline-primary btn-file rounded-0">
+    Select Image <input id="new-image" type="{{ widget.type }}" name="{{ widget.name }}">
 </span>
 <strong><p class="text-danger" id="filename"></p></strong>
