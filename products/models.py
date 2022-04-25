@@ -21,22 +21,26 @@ class Category(models.Model):
 class Boat(models.Model):
 
     sku = models.CharField(max_length=10, unique=True, default='test')
+    name = models.CharField(max_length=254, default='test')
     currency = models.ForeignKey(
         Currency, default='EUR', on_delete=models.SET_DEFAULT,
         null=True, blank=True, max_length=3,
         )
     price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ManyToManyField(Category, blank=True)
-    manufacturer = models.CharField(max_length=254, null=True, blank=True)
-    condition = models.CharField(max_length=254, null=True, blank=True)
-    fuel = models.CharField(max_length=254, null=True, blank=True)
-    year_built = models.IntegerField(null=True, blank=True)
+    brand = models.CharField(max_length=254, null=True, blank=True)
+    state_of_assembly = models.CharField(max_length=254, null=True, blank=True)
+    power_source = models.CharField(max_length=254, null=True, blank=True)
+    age_range = models.IntegerField(null=True, blank=True)
     length = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
     width = models.DecimalField(
         max_digits=5, decimal_places=2, null=True, blank=True)
+    height = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
+    speed = models.DecimalField(
+        max_digits=5, decimal_places=2, null=True, blank=True)
     material = models.CharField(max_length=254, null=True, blank=True)
-    location = models.CharField(max_length=254, null=True, blank=True)
     views = models.IntegerField(default=0, null=True, blank=True)
     image = CloudinaryField('image', null=True, blank=True)
 

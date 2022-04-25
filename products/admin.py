@@ -6,15 +6,19 @@ from .models import Category, Boat
 class BoatAdmin(admin.ModelAdmin):
     list_display = (
         'sku',
-        'manufacturer',
-        'year_built',
-        'location',
-        'fuel',
-        'condition',
-        'image',
-        'length',
+        'name',
         'currency',
         'price',
+        'brand',
+        'state_of_assembly',
+        'power_source',
+        'age_range',
+        'length',
+        'width',
+        'height',
+        'speed',
+        'material',
+        'views',
     )
     list_filter = (
         ('image', admin.BooleanFieldListFilter),
