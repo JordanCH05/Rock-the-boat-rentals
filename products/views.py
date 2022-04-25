@@ -58,7 +58,8 @@ def all_products(request):
 
             for term in query:
 
-                q = (Q(category__name__icontains=term) |
+                q = (Q(sku__icontains=term) |
+                     Q(category__name__icontains=term) |
                      Q(manufacturer__icontains=term) |
                      Q(condition__icontains=term) |
                      Q(fuel__icontains=term) |
@@ -146,9 +147,19 @@ def product_detail(request, boat_id):
 
 
 def add_product(request):
-    """ Add a product to the store """
+    """ Add a boat to the store """
 
-    form = BoatForm()
+    if request.method == 'POST':
+        form = BoatForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added boat!')
+            return redirect(reverse('add_product'))
+        else:
+            messages.error(request, 'Failed to add boat.'
+                           ' Please ensure the form is valid')
+    else:
+        form = BoatForm()
 
     template = 'products/add_product.html'
     context = {
