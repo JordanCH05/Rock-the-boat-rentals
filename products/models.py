@@ -21,6 +21,10 @@ class Category(models.Model):
 class Boat(models.Model):
 
     sku = models.CharField(max_length=10, unique=True, default='test')
+    currency = models.ForeignKey(
+        Currency, default='EUR', on_delete=models.SET_DEFAULT,
+        null=True, blank=True, max_length=3,
+        )
     price = models.DecimalField(max_digits=8, decimal_places=2)
     category = models.ManyToManyField(Category, blank=True)
     manufacturer = models.CharField(max_length=254, null=True, blank=True)
@@ -35,10 +39,6 @@ class Boat(models.Model):
     location = models.CharField(max_length=254, null=True, blank=True)
     views = models.IntegerField(default=0, null=True, blank=True)
     image = CloudinaryField('image', null=True, blank=True)
-    currency = models.ForeignKey(
-        Currency, default='EUR', on_delete=models.SET_DEFAULT,
-        null=True, blank=True, max_length=3,
-        )
 
     class Meta:
         ordering = ['-image', '-views']
