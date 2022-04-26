@@ -46,20 +46,14 @@
                             <td class="col-2 mb-1">
                                 <a href="{% url 'product_detail' item.boat.id %}">
                                     {% if item.boat.image %}
-                                                <a href="{{ item.boat.image.url }}">
-                                                    <img class="img-fluid" src="{{ item.boat.image.url }}" alt="{{ item.boat.sku }}">
-                                                </a>
-                                            {% else %}
-                                                <a href="">
-                                                    {% if item.boat.category %}
-                                                        {% for category in item.boat.category.all %}
-                                                            {% if forloop.counter == 1 %}
-                                                                <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ item.boat.sku }}">
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    {% endif %}
-                                                </a>
-                                            {% endif %}
+                                        <a href="{{ item.boat.image.url }}">
+                                            <img class="img-fluid" src="{{ item.boat.image.url }}" alt="{{ item.boat.sku }}">
+                                        </a>
+                                    {% else %}
+                                        <a href="">
+                                            <img class="img-fluid" src="{{ MEDIA_URL }}default_no_image.png" alt="{{ item.boat.sku }}">
+                                        </a>
+                                    {% endif %}
                                 </a>
                             </td>
                             <td class="col-6">

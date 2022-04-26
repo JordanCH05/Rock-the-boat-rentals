@@ -31,15 +31,7 @@
                         </a>
                     {% else %}
                         <a href="">
-                            {% if boat.category.all %}
-                                {% for category in boat.category.all %}
-                                    {% if forloop.counter == 1 %}
-                                        <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
-                                    {% endif %}
-                                {% endfor %}
-                            {% else %}
-                                <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default-motor_yacht.png" alt="{{ boat.sku }}">
-                            {% endif %}
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default_no_image.png" alt="{{ boat.sku }}">
                         </a>
                     {% endif %}
                 </div>

@@ -47,13 +47,7 @@
                                             </a>
                                         {% else %}
                                             <a href="">
-                                                {% if item.boat.category %}
-                                                    {% for category in item.boat.category.all %}
-                                                        {% if forloop.counter == 1 %}
-                                                            <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ item.boat.sku }}">
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
+                                                <img class="img-fluid" src="{{ MEDIA_URL }}default_no_image.png" alt="{{ item.boat.sku }}">
                                             </a>
                                         {% endif %}
                                     </td>
