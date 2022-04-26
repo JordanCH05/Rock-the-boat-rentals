@@ -61,9 +61,9 @@
                             <div class="card border-0 h-100">
                                 <div class="card-body pb-0 d-flex flex-column position-relative">
                                     {% if boat.image %}
-                                        <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
+                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
                                     {% else %}
-                                        <img class="card-img-top flex-grow-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default_no_image.png" alt="{{ boat.sku }}">
+                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default_no_image.jpg" alt="{{ boat.sku }}">
                                     {% endif %}
                                     <a href="{% url 'product_detail' boat.id %}" class="stretched-link"></a>
                                 </div>

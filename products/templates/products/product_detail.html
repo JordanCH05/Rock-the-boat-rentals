@@ -31,7 +31,7 @@
                         </a>
                     {% else %}
                         <a href="">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default_no_image.png" alt="{{ boat.sku }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}default_no_image.jpg" alt="{{ boat.sku }}">
                         </a>
                     {% endif %}
                 </div>
@@ -72,7 +72,7 @@
                     {% if boat.age_range %}
                         <p><strong>Age Range:</strong> {{ boat.age_range }}+</p>
                     {% endif %}
-                    {% if boat.dimensions %}
+                    {% if boat.length %}
                         <p><strong>Dimensions:</strong> {{ boat.dimensions }}</p>
                     {% endif %}
                     {% if boat.material %}

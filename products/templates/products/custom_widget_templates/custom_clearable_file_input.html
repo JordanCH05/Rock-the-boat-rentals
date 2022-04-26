@@ -1,4 +1,4 @@
-{% if widget %}
+{% if widget.is_initial %}
     <p>{{ widget.initial_text }}:</p> 
     <a href="{{ widget.value.url }}">
         <img src="{{ widget.value.url }}" width="96" height="96" class="rounded shadow-sm">
