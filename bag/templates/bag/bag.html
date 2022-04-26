@@ -24,7 +24,7 @@
     </div>
     <row class="col">
         <div class="row">
-            <div class="col">
+            <div class="col-12">
                 {% if fleet_items %}
                     <div class="table-responsive rounded">
                         <table class="table table-borderless table-sm">
@@ -33,7 +33,8 @@
                                     <th>Boat Info</th>
                                     <th></th>
                                     <th>Price</th>
-                                    <th></th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -78,7 +79,6 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <p>Price Each:</p>
                                         {% divide factor item.boat.currency.factor as converter %}
                                         {% multiply item.boat.price converter as price %}
                                         {% if current_cur in suffix_cur %}
@@ -88,8 +88,9 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <p>Subtotal: </p>
-                                        
+                                        <p>x{{ item.quantity }}</p>
+                                    </td>
+                                    <td>
                                         {% if current_cur in suffix_cur %}
                                             <p>{% multiply price item.quantity %} {{ symbol }}</p>
                                         {% else %}
@@ -103,45 +104,47 @@
                             {% endfor %}
                         </table>
                     </div>
+            </div>
 
-                    
+            <div class="col-6">
+                <a href="{% url 'products' %}" class="btn btn-outline-primary rounded-0 btn-lg">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <span class="text-uppercase">Keep Sailing</span>
+                </a>
+                <a href="{% url 'checkout' %}" class="btn btn-primary rounded-0 btn-lg">
+                    <span class="text-uppercase">Secure Checkout</span>
+                    <span class="icon">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="col-6 text-right">
+                {% if current_cur in suffix_cur %}
+                    <h6><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></h6>
+                    <h6>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</h6>
+                    <h4 class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></h4>
+                    {% if free_shipping_delta > 0 %}
+                        <p class="mb-1 text-danger">
+                            You could get free shipping by spending just <strong>{{ free_shipping_delta|floatformat:2|intcomma }} {{ symbol }}</strong> more!
+                        </p>
+                    {% endif %}
+                {% else %}
+                    <h6><strong>Total Price: {{ symbol }}{{ total|floatformat:2|intcomma }}</strong></h6>
+                    <h6>Delivery: {{ symbol }}{{ shipping|floatformat:2|intcomma }}</h6>
+                    <h4 class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></h4>
+                    {% if free_shipping_delta > 0 %}
+                        <p class="mb-1 text-danger">
+                            You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|floatformat:2|intcomma }}</strong> more!
+                        </p>
+                    {% endif %}
+                {% endif %}
+            </div>
+            
                     <tr>
                         <td>
-                            {% if current_cur in suffix_cur %}
-                                <h6><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></h6>
-                                <h6>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</h6>
-                                <h4 class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></h4>
-                                {% if free_shipping_delta > 0 %}
-                                    <p class="mb-1 text-danger">
-                                        You could get free shipping by spending just <strong>{{ free_shipping_delta|floatformat:2|intcomma }} {{ symbol }}</strong> more!
-                                    </p>
-                                {% endif %}
-                            {% else %}
-                                <h6><strong>Total Price: {{ symbol }}{{ total|floatformat:2|intcomma }}</strong></h6>
-                                <h6>Delivery: {{ symbol }}{{ shipping|floatformat:2|intcomma }}</h6>
-                                <h4 class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></h4>
-                                {% if free_shipping_delta > 0 %}
-                                    <p class="mb-1 text-danger">
-                                        You could get free shipping by spending just <strong>{{ symbol }}{{ free_shipping_delta|floatformat:2|intcomma }}</strong> more!
-                                    </p>
-                                {% endif %}
-                            {% endif %}
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <a href="{% url 'products' %}" class="btn btn-outline-primary rounded-0 btn-lg">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="text-uppercase">Keep Sailing</span>
-                            </a>
-                            <a href="{% url 'checkout' %}" class="btn btn-primary rounded-0 btn-lg">
-                                <span class="text-uppercase">Secure Checkout</span>
-                                <span class="icon">
-                                    <i class="fas fa-lock"></i>
-                                </span>
-                            </a>
+                            
                         </td>
                     </tr>
                 {% else %}

@@ -19,7 +19,7 @@ def fleet_contents(request):
         divisor = Decimal(boat.currency.factor)
         converter = factor/divisor
         price = price * converter
-        total += price
+        total += price * quantity
         fleet_items.append({
             'boat': boat,
             'quantity': quantity,

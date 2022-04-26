@@ -30,57 +30,67 @@
         <div class="row">
             <div class="col-12 col-lg-6 order-lg-last mb-5">
                 <p class="text-muted">Order Summary ({{ product_count }})</p>
-                <div class="row">
-                    <div class="col-7 offset-2">
-                        <p class="mb-1 mt-0 small text-muted">Boat</p>
-                    </div>
-                    <div class="col-7 offset-2">
-                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-                    </div>
-                </div>
-                {% for boat in fleet_items %}
-                    <div class="row">
-                        <div class="col-2 mb-1">
-                            <a href="{% url 'product_detail' boat.id %}">
-                                {% if boat.image %}
-                                            <a href="{{ boat.image.url }}">
-                                                <img class="img-fluid" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
-                                            </a>
-                                        {% else %}
-                                            <a href="">
-                                                {% if boat.category %}
-                                                    {% for category in boat.category.all %}
-                                                        {% if forloop.counter == 1 %}
-                                                            <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </a>
-                                        {% endif %}
-                            </a>
-                        </div>
-                        <div class="col-7">
-                            <p class="my-0"><strong>{{ boat.sku }}</strong></p>
-                        </div>
-                        <div class="col-3 text-right">
-                            {% divide factor boat.currency.factor as converter %}
-                            {% multiply boat.price converter as price %}
-                            {% if current_cur in suffix_cur %}
-                                <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
-                            {% else %}
-                                <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
-                            {% endif %}
-                        </div>
-                    </div>
+                <div class="table-responsive rounded">
+                    <table class="table table-borderless table-sm">
+                        <thead>
+                            <tr>
+                                <th>Boat</th>
+                                <th></th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                {% for item in fleet_items %}
+                        <tr>
+                            <td class="col-2 mb-1">
+                                <a href="{% url 'product_detail' item.boat.id %}">
+                                    {% if item.boat.image %}
+                                                <a href="{{ item.boat.image.url }}">
+                                                    <img class="img-fluid" src="{{ item.boat.image.url }}" alt="{{ item.boat.sku }}">
+                                                </a>
+                                            {% else %}
+                                                <a href="">
+                                                    {% if item.boat.category %}
+                                                        {% for category in item.boat.category.all %}
+                                                            {% if forloop.counter == 1 %}
+                                                                <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ item.boat.sku }}">
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </a>
+                                            {% endif %}
+                                </a>
+                            </td>
+                            <td class="col-6">
+                                <p class="my-0"><strong>{{ item.boat.name }}</strong></p>
+                            </td>
+                            <td class="col-1">
+                                {% divide factor item.boat.currency.factor as converter %}
+                                {% multiply item.boat.price converter as price %}
+                                {% if current_cur in suffix_cur %}
+                                    <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
+                                {% else %}
+                                    <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
+                                {% endif %}
+                            </td>
+                            <td class="col-1">
+                                <p>x{{ item.quantity }}</p>
+                            </td>
+                            <td class="col-2">
+                                {% if current_cur in suffix_cur %}
+                                    <p>{% multiply price item.quantity %} {{ symbol }}</p>
+                                {% else %}
+                                    <p>{{ symbol }}{% multiply price item.quantity %}</p>
+                                {% endif %}
+                            </td>
+                        </tr>
                 {% endfor %}
+                    </table>
+                </div>
                 <hr class="my-0">
                 <div class="row  text-right">
-                    <div class="col-7 offset-2">
-                        <p class="my-0">Order Total:</p>
-                        <p class="my-0">Delivery:</p>
-                        <p class="my-0">Grand Total:</p>
-                    </div>
-                    <div class="col-3">
+                    <div class="col-12">
                         {% if current_cur in suffix_cur %}
                             <h6><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></h6>
                             <h6>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</h6>
