@@ -52,7 +52,7 @@
                                     <td>
                                         <a href="{% url 'order_history' order.order_number %}"
                                         title="{{ order.order_number }}">
-                                            {{ order.order_number|truncatechars:6 }}
+                                            {{ order.order_number|truncatechars:11 }}
                                         </a>
                                     </td>
                                     <td>{{ order.date }}</td>
@@ -60,12 +60,16 @@
                                         <ul class="list-unstyled">
                                             {% for item in order.lineitems.all %}
                                                 <li class="small">
-                                                    {{ item.boat.sku }}
+                                                    {{ item.boat.sku }} x {{ item.quantity }}
                                                 </li>
                                             {% endfor %}
                                         </ul>
                                     </td>
-                                    <td>${{ order.grand_total }}</td>
+                                    {% if order.currnecy in suffix_cur %}
+                                        <td>{{ order.grand_total }} {{ order.currency.symbol }}</td>
+                                    {% else %}
+                                        <td>{{ order.currency.symbol }}{{ order.grand_total }}</td>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
