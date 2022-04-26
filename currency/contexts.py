@@ -13,8 +13,8 @@ def currencies(request):
     if not currency_objs:
         filt_cur = []
         factor = 1
-        symbol = '€'
-        fa_cur = 'euro'
+        symbol = '£'
+        fa_cur = 'sterling'
     else:
         filt_cur = Currency.objects.filter(code=currency).values()[0]
         factor = filt_cur['factor']
