@@ -4,6 +4,8 @@
 {% load divide %}
 {% load humanize %}
 
+{% block extra_title %}| Boats{% endblock %}
+
 
 {% block page_header %}
     <div class="container header-container">
@@ -85,7 +87,7 @@
                                                     {{ symbol }}{{ price|floatformat:"2"|intcomma }}
                                                 {% endif %}
                                             </p>
-                                            <p class="lead mb-0 text-left">{{ boat.sku }}</p>
+                                            <p class="lead mb-0 text-left">{{ boat.name }}</p>
                                             {% if boat.category.all %}
                                             <p class="small mt-1 mb-0">
                                                 {% for category in boat.category.all %}

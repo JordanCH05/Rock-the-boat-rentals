@@ -34,21 +34,22 @@
                                     <th></th>
                                     <th>Price</th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
-                            {% for boat in fleet_items %}
+                            {% for item in fleet_items %}
                                 <tr>
                                     <td class="p-3 w-25">
-                                        {% if boat.image %}
-                                            <a href="{{ boat.image.url }}">
-                                                <img class="img-fluid" src="{{ boat.image.url }}" alt="{{ boat.sku }}">
+                                        {% if item.boat.image %}
+                                            <a href="{{ item.boat.image.url }}">
+                                                <img class="img-fluid" src="{{ item.boat.image.url }}" alt="{{ item.boat.sku }}">
                                             </a>
                                         {% else %}
                                             <a href="">
-                                                {% if boat.category %}
-                                                    {% for category in boat.category.all %}
+                                                {% if item.boat.category %}
+                                                    {% for category in item.boat.category.all %}
                                                         {% if forloop.counter == 1 %}
-                                                            <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ boat.sku }}">
+                                                            <img class="img-fluid" src="{{ MEDIA_URL }}default-{{ category.name }}.png" alt="{{ item.boat.sku }}">
                                                         {% endif %}
                                                     {% endfor %}
                                                 {% endif %}
@@ -56,19 +57,30 @@
                                         {% endif %}
                                     </td>
                                     <td class="py-3">
-                                        <p><strong>{{ boat.sku }}</strong></p>
-                                        <p>manufacturer: {{ boat.manufacturer }}</p>
-                                        <p>condition: {{ boat.condition }}</p>
-                                        <p>fuel: {{ boat.fuel }}</p>
-                                        <p>year_built: {{ boat.year_built }}</p>
-                                        <p>length: {{ boat.length }}m</p>
-                                        <p>width: {{ boat.width }}m</p>
-                                        <p>material: {{ boat.material }}</p>
-                                        <p>location: {{ boat.location }}</p>
+                                        <p><strong>{{ item.boat.name }}</strong></p>
+                                        {% if item.boat.brand %}
+                                            <p><strong>Brand:</strong> {{ item.boat.brand }}</p>
+                                        {% endif %}
+                                        {% if item.boat.state_of_assembly %}
+                                            <p><strong>State of Assembly:</strong> {{ item.boat.state_of_assembly }}</p> 
+                                        {% endif %}
+                                        {% if item.boat.power_source %}
+                                            <p><strong>Power Source:</strong> {{ item.boat.power_source }}</p>
+                                        {% endif %}
+                                        {% if item.boat.age_range %}
+                                            <p><strong>Age Range:</strong> {{ item.boat.age_range }}+</p>
+                                        {% endif %}
+                                        {% if item.boat.dimensions %}
+                                            <p><strong>Dimensions:</strong> {{ item.boat.dimensions }}</p>
+                                        {% endif %}
+                                        {% if item.boat.material %}
+                                            <p><strong>Materials:</strong> {{ item.boat.material }}</p>
+                                        {% endif %}
                                     </td>
                                     <td>
-                                        {% divide factor boat.currency.factor as converter %}
-                                        {% multiply boat.price converter as price %}
+                                        <p>Price Each:</p>
+                                        {% divide factor item.boat.currency.factor as converter %}
+                                        {% multiply item.boat.price converter as price %}
                                         {% if current_cur in suffix_cur %}
                                             <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
                                         {% else %}
@@ -76,7 +88,16 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <button class="btn btn-danger remove-item float-right" id="remove_{{ boat }}"><small>Remove</small></button>
+                                        <p>Subtotal: </p>
+                                        
+                                        {% if current_cur in suffix_cur %}
+                                            <p>{% multiply price item.quantity %} {{ symbol }}</p>
+                                        {% else %}
+                                            <p>{{ symbol }}{% multiply price item.quantity %}</p>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger remove-item float-right" id="remove_{{ item.boat }}"><small>Remove</small></button>
                                     </td>
                                 </tr>
                             {% endfor %}

@@ -43,9 +43,13 @@ class Boat(models.Model):
     material = models.CharField(max_length=254, null=True, blank=True)
     views = models.IntegerField(default=0, null=True, blank=True)
     image = CloudinaryField('image', null=True, blank=True)
+    dimensions = models.CharField(max_length=254, null=True, blank=True)
 
     class Meta:
         ordering = ['-image', '-views']
 
     def __str__(self):
         return str(self.sku)
+
+    def dimensions(self):
+        return f'{self.length}cm X {self.width}cm X {self.height}cm'

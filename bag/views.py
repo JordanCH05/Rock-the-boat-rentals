@@ -1,5 +1,7 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
+
+from products.models import Boat
 
 
 def view_bag(request):
@@ -8,17 +10,20 @@ def view_bag(request):
     return render(request, 'bag/bag.html')
 
 
-def add_to_bag(request, boat):
+def add_to_bag(request, boat_id):
     """ Add a boat to the shopping bag """
 
+    boat = get_object_or_404(Boat, pk=boat_id)
     redirect_url = request.POST.get('redirect_url')
-    fleet = request.session.get('fleet', [])
+    quantity = int(request.POST.get('quantity'))
+    fleet = request.session.get('fleet', {})
 
-    if boat in fleet:
-        messages.info(request, f'{boat} already in your fleet')
+    if boat.sku in fleet:
+        fleet[boat.sku] += quantity
+        messages.info(request, f'Updated quantity of: {boat.name}')
     else:
-        fleet.append(boat)
-        messages.success(request, f'Added {boat} to your fleet')
+        fleet[boat.sku] = quantity
+        messages.success(request, f'Added to your fleet: {boat.name}')
 
     request.session['fleet'] = fleet
 

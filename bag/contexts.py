@@ -9,18 +9,21 @@ def fleet_contents(request):
 
     total = 0
     product_count = 0
-    fleet = request.session.get('fleet', [])
+    fleet = request.session.get('fleet', {})
     fleet_items = []
     factor = currencies(request)['factor']
 
-    for sku in fleet:
+    for sku, quantity in fleet.items():
         boat = get_object_or_404(Boat, sku=sku)
         price = boat.price
         divisor = Decimal(boat.currency.factor)
         converter = factor/divisor
         price = price * converter
         total += price
-        fleet_items.append(boat)
+        fleet_items.append({
+            'boat': boat,
+            'quantity': quantity,
+        })
         product_count += 1
 
     shipping_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
