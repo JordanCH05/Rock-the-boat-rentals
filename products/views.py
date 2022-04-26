@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
-from django.db.models import Q
+from django.db.models import Q, Avg
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Boat, Category
@@ -141,8 +141,12 @@ def product_detail(request, boat_id):
     if boat.sku in fleet:
         in_fleet = True
 
+    reviews = boat.reviews
+    score = reviews.all().aggregate(Avg('score'))['score__avg']
+
     context = {
         'boat': boat,
+        'score': score,
         'in_fleet': in_fleet,
     }
 

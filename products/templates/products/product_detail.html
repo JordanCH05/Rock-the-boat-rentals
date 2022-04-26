@@ -59,7 +59,10 @@
                         {% endfor %}
                     </p>
                     {% endif %}
-                    <small class="text-muted"><i class="fas fa-star mr-1"></i>Views: {{ boat.views }}</small>
+                    {% if score %}
+                        <p class="small mt-1 mb-0 text-muted"><i class="fas fa-star mr-1"></i>Score: {{ score|floatformat:"2" }} / 5</p>
+                    {% endif %}
+                    <p class="small mt-1 mb-0 text-muted"><i class="fa-solid fa-eye mr-1"></i>Views: {{ boat.views }}</p>
                     {% if boat.brand %}
                         <p><strong>Brand:</strong> {{ boat.brand }}</p>
                     {% endif %}
