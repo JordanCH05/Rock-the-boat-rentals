@@ -78,7 +78,7 @@ def all_products(request):
             boat_list = boat_list.filter(queries)
             page_url += f'&q={q_terms}'
 
-    paginator = Paginator(boat_list, 40)
+    paginator = Paginator(boat_list, 8)
 
     page = request.GET.get('page')
 
