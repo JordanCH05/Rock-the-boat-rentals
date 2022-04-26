@@ -44,14 +44,14 @@ def checkout(request):
 
     currency = request.session.get('currency', settings.DEFAULT_CURRENCY)
     if stripe_total > 99999999:
-        if currency == 'EUR':
+        if currency == 'GBP':
             messages.error(request, "The total price exceeded the €999,999.99 \
                 payment limit, please try seperate payments")
             return redirect(reverse('view_bag'))
         else:
             messages.error(request, f"The total price exceeded the 999,999.99 \
                 {currency} payment limit, so the currency has been changed \
-                    back to the deafult: {settings.DEFAULT_CURRENCY}.")
+                    back to the default: {settings.DEFAULT_CURRENCY}.")
             currency = settings.DEFAULT_CURRENCY
             request.session['currency'] = settings.DEFAULT_CURRENCY
 
@@ -85,17 +85,19 @@ def checkout(request):
             delivery_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
             order.delivery_threshold = delivery_threshold
             order.save()
-            for sku in fleet:
+            for sku, quantity in fleet.items():
                 try:
                     boat = Boat.objects.get(sku=sku)
                     price = boat.price
                     divisor = Decimal(boat.currency.factor)
                     converter = factor/divisor
                     price = price * converter
+                    lineitem_total = price * quantity
                     order_line_item = OrderLineItem(
                         order=order,
                         boat=boat,
-                        lineitem_total=price,
+                        quantity=quantity,
+                        lineitem_total=lineitem_total,
                     )
                     order_line_item.save()
 
