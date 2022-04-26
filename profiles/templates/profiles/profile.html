@@ -61,6 +61,7 @@
                                             {% for item in order.lineitems.all %}
                                                 <li class="small">
                                                     {{ item.boat.sku }} x {{ item.quantity }}
+                                                    
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -70,6 +71,9 @@
                                     {% else %}
                                         <td>{{ order.currency.symbol }}{{ order.grand_total }}</td>
                                     {% endif %}
+                                    <td>
+                                        
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </tbody>
@@ -77,6 +81,38 @@
                 </div>
             </div>
         </div>
+        {% if skus %}
+            <div class="row">
+                <div class="col-6 offset-6">
+                    <table class="table table-sm table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Boats you've bought before!</th>
+                                <th>Review Here</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sku in skus %}
+                            <tr>
+                                <td>
+                                    <p>{{ sku }}</p>
+                                </td>
+                                <td>
+                                <form action="{% url 'add_review' sku %}" class="mt-3" method="POST" id="add_review_form">
+                                    {% csrf_token %}
+                                    {% crispy review %}
+                                    <a href="" class="btn btn-info rounded-0" type="submit">Add Review</a>
+                                </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
