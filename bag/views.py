@@ -2,12 +2,19 @@ from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from django.contrib import messages
 
 from products.models import Boat
+from discounts.forms import CouponForm
 
 
 def view_bag(request):
     """ A view that renders the bag contents page """
 
-    return render(request, 'bag/bag.html')
+    coupon_form = CouponForm()
+
+    context = {
+        'coupon_form': coupon_form,
+    }
+
+    return render(request, 'bag/bag.html', context)
 
 
 def add_to_bag(request, boat_id):

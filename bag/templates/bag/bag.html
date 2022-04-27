@@ -24,10 +24,9 @@
             <hr>
         </div>
     </div>
-    <row class="col">
-        <div class="row">
+    <div class="row">
+        {% if fleet_items %}
             <div class="col-12">
-                {% if fleet_items %}
                     <div class="table-responsive rounded">
                         <table class="table table-borderless table-sm">
                             <thead>
@@ -101,7 +100,13 @@
                         </table>
                     </div>
             </div>
-
+            <div class="col-12">
+                <form action="{% url 'apply_coupon' %}" method="POST">
+                    {% csrf_token %}
+                    {{ coupon_form }}
+                    <button type="submit" class="btn btn-info">Apply</button>
+                </form>
+            </div>
             <div class="col-6">
                 <a href="{% url 'products' %}" class="btn btn-outline-primary rounded-0 btn-lg">
                     <span class="icon">
@@ -120,6 +125,9 @@
                 {% if current_cur in suffix_cur %}
                     <h6><strong>Total Price: {{ total|floatformat:2|intcomma }} {{ symbol }}</strong></h6>
                     <h6>Delivery: {{ shipping|floatformat:2|intcomma }} {{ symbol }}</h6>
+                    {% if discount %}
+                        <h6 class="text-success">-{{ discount|floatformat:2|intcomma }} {{ symbol }}</h6>
+                    {% endif %}
                     <h4 class="mt-4"><strong>Grand Total:{{ grand_total|floatformat:2|intcomma }} {{ symbol }}</strong></h4>
                     {% if free_shipping_delta > 0 %}
                         <p class="mb-1 text-danger">
@@ -129,6 +137,9 @@
                 {% else %}
                     <h6><strong>Total Price: {{ symbol }}{{ total|floatformat:2|intcomma }}</strong></h6>
                     <h6>Delivery: {{ symbol }}{{ shipping|floatformat:2|intcomma }}</h6>
+                    {% if discount %}
+                        <h6 class="text-success">-{{ symbol }}{{ discount|floatformat:2|intcomma }}</h6>
+                    {% endif %}
                     <h4 class="mt-4"><strong>Grand Total:{{ symbol }}{{ grand_total|floatformat:2|intcomma }}</strong></h4>
                     {% if free_shipping_delta > 0 %}
                         <p class="mb-1 text-danger">
@@ -137,19 +148,13 @@
                     {% endif %}
                 {% endif %}
             </div>
-            
-                    <tr>
-                        <td>
-                            
-                        </td>
-                    </tr>
-                {% else %}
-                    <p>Your fleet is empty</p>
-                    <a href="{% url 'products' %}" class="btn btn-primary">
-                        Find a Boat to add to your Fleet
-                    </a>
-                {% endif %}
-    </row>
+        {% else %}
+            <p>Your fleet is empty</p>
+            <a href="{% url 'products' %}" class="btn btn-primary">
+                Find a Boat to add to your Fleet
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block postloadjs %}
