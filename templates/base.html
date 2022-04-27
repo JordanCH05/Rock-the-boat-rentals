@@ -70,11 +70,7 @@
                     <li class="list-inline-item dropdown">
                         <a class="text-white nav-link" href="#" id="currency-options" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <div class="text-center">
-                                {% if fa_cur == 'krone' %}
-                                    <div>Kr.</div>
-                                {% else %}
-                                    <div><i class="fas fa-{{ fa_cur }}-sign"></i></div>
-                                {% endif %}
+                                <div>{{ symbol }}</div>
                                 <p class="my-0">{{ current_cur }}</p>
                             </div>
                         </a>

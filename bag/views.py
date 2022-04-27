@@ -30,14 +30,15 @@ def add_to_bag(request, boat_id):
     return redirect(redirect_url)
 
 
-def remove_from_bag(request, boat):
+def remove_from_bag(request, boat_id):
     """ Remove a boat from the shopping bag """
 
+    boat = get_object_or_404(Boat, pk=boat_id)
     try:
-        fleet = request.session.get('fleet', [])
+        fleet = request.session.get('fleet', {})
 
-        fleet.remove(boat)
-        messages.success(request, f'Removed {boat} from your fleet')
+        fleet.pop(boat.sku)
+        messages.success(request, f'Removed {boat.sku} from your fleet')
 
         request.session['fleet'] = fleet
         return HttpResponse(status=200)
