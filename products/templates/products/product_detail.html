@@ -134,10 +134,54 @@
                 </form>
             </div>
         </div>
+        {% if reviews %}
+        <div class="row">
+            <div class="mt-3 col-12">
+                <h4 class="font-weight-bold text-center">Reviews</h4>
+                {% divide score 5 as dec %}
+                {% multiply dec 100 as percent %}
+                <h4 class="text-center">
+                    <div class="stars-outer">
+                        <div class='stars-inner w-{{ percent|floatformat:"0" }}'></div>
+                    </div>
+                </h4>    
+                {% for review in reviews %}
+                    <div class="bg-info text-white mb-3">
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="p-4">{{ review.username|capfirst }}</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-center p-4"><i class="fas fa-star mr-1"></i>{{ review.score|floatformat:"0" }} / 5</p>
+                            </div>
+                            <div class="col-4">
+                                <p class="text-right p-4">{{ review.created_on | date:"jS N Y" }}</p>
+                            </div>
+                        </div>
+                        {% if review.body %}
+                            <div class="row">
+                                <div class="col-10 offset-1 mb-2">
+                                    <p>{{ review.body | safe }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+               
+            </div>
+        </div>
+        {% endif %}
     </div>
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
+<script type="text/javascript">
+    var stars = $('.stars-inner');
+    var classList = stars[0].classList;
+    var wClass = classList[1];
+    var percent = wClass.split("-")[1];
+    stars[0].style.width = `${percent}%`;
+</script>
 {% endblock %}

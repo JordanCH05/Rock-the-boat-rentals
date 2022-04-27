@@ -141,11 +141,12 @@ def product_detail(request, boat_id):
     if boat.sku in fleet:
         in_fleet = True
 
-    reviews = boat.reviews
-    score = reviews.all().aggregate(Avg('score'))['score__avg']
+    reviews = boat.reviews.all()
+    score = reviews.aggregate(Avg('score'))['score__avg']
 
     context = {
         'boat': boat,
+        'reviews': reviews,
         'score': score,
         'in_fleet': in_fleet,
     }
