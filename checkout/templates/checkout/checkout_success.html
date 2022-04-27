@@ -67,9 +67,15 @@
                                 {{ item.boat.sku }}
                             </p>
                         </div>
+                        {% if order.currency in suffix_cur %}
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="small mb-0">{{ item.boat.price }}</p>
+                            <p class="small mb-0">{{ item.boat.price }} {{ order.currency.symbol }}</p>
                         </div>
+                        {% else %}
+                        <div class="col-12 col-md-8 text-md-right">
+                            <p class="small mb-0">{{ order.currency.symbol }}{{ item.boat.price }}</p>
+                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
 
@@ -183,6 +189,17 @@
                         </div>
                     </div>
 
+                    {% if order.coupon %}
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <p class="mb-0 font-weight-bold">Discount</p>
+                        </div>
+                        <div class="col-12 col-md-8 text-md-right">
+                            <p class="mb-0">-{{ order.discount }} {{ order.currency.symbol }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
+
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 font-weight-bold">Grand Total</p>
@@ -211,6 +228,17 @@
                             <p class="mb-0">{{ order.currency.symbol }}{{ order.delivery_cost }}</p>
                         </div>
                     </div>
+
+                    {% if order.coupon %}
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <p class="mb-0 font-weight-bold">Discount</p>
+                        </div>
+                        <div class="col-12 col-md-8 text-md-right">
+                            <p class="mb-0">-{{ order.currency.symbol }}{{ order.discount }}</p>
+                        </div>
+                    </div>
+                    {% endif %}
 
                     <div class="row">
                         <div class="col-12 col-md-4">

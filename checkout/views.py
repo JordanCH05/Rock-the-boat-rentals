@@ -11,8 +11,9 @@ from .forms import OrderForm
 from .models import OrderLineItem, Order
 from currencies.models import Currency
 from products.models import Boat
-from profiles.forms import UserProfileForm
+from discounts.models import Coupon
 from profiles.models import UserProfile
+from profiles.forms import UserProfileForm
 from bag.contexts import fleet_contents
 from currency.contexts import currencies
 
@@ -56,7 +57,7 @@ def checkout(request):
             request.session['currency'] = settings.DEFAULT_CURRENCY
 
     if request.method == 'POST':
-        fleet = request.session.get('fleet', [])
+        fleet = request.session.get('fleet', {})
         if not fleet:
             messages.error(request,
                            "There's nothing in your fleet at the moment")
@@ -84,6 +85,11 @@ def checkout(request):
             order.original_bag = fleet
             delivery_threshold = settings.FREE_SHIPPING_THRESHOLD * factor
             order.delivery_threshold = delivery_threshold
+            coupon_id = request.session.get('coupon_id', None)
+            if coupon_id:
+                coupon = Coupon.objects.get(id=coupon_id)
+                order.coupon = coupon
+                order.discount = fleet_contents(request)['discount']
             order.save()
             for sku, quantity in fleet.items():
                 try:
@@ -193,6 +199,9 @@ def checkout_success(request, order_number):
 
     if 'fleet' in request.session:
         del request.session['fleet']
+
+    if 'coupon_id' in request.session:
+        del request.session['coupon_id']
 
     template = 'checkout/checkout_success.html'
     context = {

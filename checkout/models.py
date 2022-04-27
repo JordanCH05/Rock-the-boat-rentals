@@ -1,4 +1,5 @@
 import uuid
+from decimal import Decimal
 
 from django.db import models
 from django.db.models import Sum
@@ -8,6 +9,7 @@ from django_countries.fields import CountryField
 from currencies.models import Currency
 from products.models import Boat
 from profiles.models import UserProfile
+from discounts.models import Coupon
 
 
 class Order(models.Model):
@@ -34,6 +36,8 @@ class Order(models.Model):
         Currency, default='EUR', on_delete=models.SET_DEFAULT,
         null=True, blank=True, max_length=3,
         )
+    coupon = models.ForeignKey(Coupon, on_delete=models.PROTECT, null=True, blank=True)
+    discount = models.DecimalField(default=0, decimal_places=2, max_digits=10)
 
     def _generate_order_number(self):
         """
@@ -54,6 +58,9 @@ class Order(models.Model):
         else:
             self.delivery_cost = 0
         self.grand_total = self.order_total + self.delivery_cost
+        if self.coupon:
+            discount = (self.coupon.discount / Decimal(100)) * self.grand_total
+            self.grand_total = self.grand_total - discount
         self.save()
 
     def save(self, *args, **kwargs):
