@@ -52,7 +52,7 @@ def edit_review(request, review_id):
             review.boat = boat
             review.save()
             messages.success(request, 'Successfully updated review!')
-            return redirect(reverse('profile'))
+            return redirect(reverse('product_detail', args=[boat.id]))
         else:
             messages.error(request, 'Failed to update review.'
                            ' Please ensure the form is valid')
@@ -67,3 +67,20 @@ def edit_review(request, review_id):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def delete_review(request, review_id):
+    """ Edit a boat review """
+
+    review = get_object_or_404(Review, pk=review_id)
+    boat = review.boat
+
+    if request.user != review.username:
+        messages.error(request, 'Sorry, this is not your review. Please login to correct user in order to delete')
+        return redirect(reverse('product_detail', args=[boat.id]))
+
+    review.delete()
+    messages.success(request, 'Review deleted!')
+
+    return redirect(reverse('product_detail', args=[boat.id]))
