@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load divide %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
@@ -82,14 +83,13 @@
             </div>
         </div>
         {% if boat_list %}
-            <div class="row">
-                <div class="col-6 offset-6">
-                    <table class="table table-sm table-borderless">
+            <div class="row mt-3">
+                <div class="col-12 col-lg-6">
+                    <table class="table table-sm">
                         <thead>
                             <tr>
                                 <th>Boats you've bought before!</th>
                                 <th>Review Here</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,6 +97,7 @@
                             <tr>
                                 <td>
                                     <p>{{ boat.sku }}</p>
+                                    <p>{{ boat.name }}</p>
                                 </td>
                                 <td>
                                     <a href="{% url 'add_review' boat.id %}" class="btn btn-info rounded-0" type="submit">Add Review</a>
@@ -105,7 +106,40 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    
+                </div>
+                <div class="col-12 col-lg-6">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Boats you've reviewed before!</th>
+                                <th class="w-50"></th>
+                                <th>Edit Review Here</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for review in reviews %}
+                            <tr>
+                                <td>
+                                    {% divide review.score 5 as dec %}
+                                    {% multiply dec 100 as percent %}
+                                    <p>{{ review.boat.sku }}</p>
+                                    <p>{{ review.boat.name|truncatechars:31 }}</p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <div class="stars-outer">
+                                            <div class='stars-inner w-{{ percent|floatformat:"0" }}'></div>
+                                        </div>
+                                    </p>
+                                    <p>{{ review.body|truncatechars:61 }}</p>
+                                </td>
+                                <td>
+                                    <a href="{% url 'edit_review' review.id %}" class="btn btn-info rounded-0" type="submit">Edit Review</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         {% endif %}
@@ -113,6 +147,7 @@
 {% endblock %}
 
 {% block postloadjs %}
-        {{ block.super }}
-        <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'profiles/js/countryfield.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/review_stars.js' %}"></script></script>
 {% endblock %}

@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from checkout.models import Order
 from .models import UserProfile
 from .forms import UserProfileForm
-from reviews.forms import ReviewForm
+from reviews.models import Review
 
 
 @login_required
@@ -33,14 +33,16 @@ def profile(request):
             if boat not in boat_list:
                 boat_list.append(boat)
 
-    review = ReviewForm()
+    user = profile.user
+    reviews = Review.objects.filter(username=user)
 
     template = 'profiles/profile.html'
     context = {
+        'profile': profile,
         'form': form,
         'orders': orders,
         'boat_list': boat_list,
-        'review': review,
+        'reviews': reviews,
         'on_profile_page': True,
     }
 
