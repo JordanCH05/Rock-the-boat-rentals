@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        {% if skus %}
+        {% if boat_list %}
             <div class="row">
                 <div class="col-6 offset-6">
                     <table class="table table-sm table-borderless">
@@ -93,17 +93,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for sku in skus %}
+                            {% for boat in boat_list %}
                             <tr>
                                 <td>
-                                    <p>{{ sku }}</p>
+                                    <p>{{ boat.sku }}</p>
                                 </td>
                                 <td>
-                                <form action="{% url 'add_review' sku %}" class="mt-3" method="POST" id="add_review_form">
-                                    {% csrf_token %}
-                                    {% crispy review %}
-                                    <a href="" class="btn btn-info rounded-0" type="submit">Add Review</a>
-                                </form>
+                                    <a href="{% url 'add_review' boat.id %}" class="btn btn-info rounded-0" type="submit">Add Review</a>
                                 </td>
                             </tr>
                             {% endfor %}

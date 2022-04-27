@@ -23,14 +23,15 @@ def profile(request):
                            ' Please ensure the form is valid')
     else:
         form = UserProfileForm(instance=profile)
+
     orders = profile.orders.all()
-    skus = []
+    boat_list = []
     for order in orders:
         items = order.lineitems.all()
         for item in items:
-            sku = item.boat.sku
-            if sku not in skus:
-                skus.append(sku)
+            boat = item.boat
+            if boat not in boat_list:
+                boat_list.append(boat)
 
     review = ReviewForm()
 
@@ -38,7 +39,7 @@ def profile(request):
     context = {
         'form': form,
         'orders': orders,
-        'skus': skus,
+        'boat_list': boat_list,
         'review': review,
         'on_profile_page': True,
     }
