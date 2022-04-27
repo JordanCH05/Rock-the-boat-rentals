@@ -184,13 +184,7 @@
 {% endblock %}
 
 {% block postloadjs %}
-{{ block.super }}
-{% include 'products/includes/quantity_input_script.html' %}
-<script type="text/javascript">
-    var stars = $('.stars-inner');
-    var classList = stars[0].classList;
-    var wClass = classList[1];
-    var percent = wClass.split("-")[1];
-    stars[0].style.width = `${percent}%`;
-</script>
+    {{ block.super }}
+    {% include 'products/includes/quantity_input_script.html' %}
+    <script type="text/javascript" src="{% static 'js/review_stars.js' %}"></script></script>
 {% endblock %}
