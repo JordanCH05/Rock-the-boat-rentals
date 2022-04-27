@@ -1,0 +1,64 @@
+[{
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "name": "speedboat",
+      "friendly_name": "Speedboat"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "submarine",
+      "friendly_name": "Submarine"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "hovercraft",
+      "friendly_name": "Hovercraft"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "animal",
+      "friendly_name": "Animal"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "jetski",
+      "friendly_name": "Jetski"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "name": "land",
+      "friendly_name": "Land"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "name": "warship",
+      "friendly_name": "Warship"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "fishing",
+      "friendly_name": "Fishing"
+    }
+  }]

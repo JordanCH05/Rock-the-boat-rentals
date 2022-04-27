@@ -1,0 +1,38 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+          "password": "pbkdf2_sha256$260000$peWaRNc84ZcT3JjJImY0oG$AAXTHaMf9PfiVhwQwZgDpgOGTs8ETA9n7v1RTJtZ1Ro=",
+          "last_login": "2022-04-27T15:40:28.255Z",
+          "is_superuser": true,
+          "username": "admin",
+          "first_name": "",
+          "last_name": "",
+          "email": "jordi.caristiahill@gmail.com",
+          "is_staff": true,
+          "is_active": true,
+          "date_joined": "2022-04-25T18:35:49Z",
+          "groups": [],
+          "user_permissions": []
+        }
+      },
+      {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+          "password": "pbkdf2_sha256$260000$iPkNzX34OxEEFesO8Tt2Pr$4VeMV+O4UTQmYrUuJJGBL/Bs0SyMpoY6xBakeaUKpro=",
+          "last_login": "2022-04-27T15:36:23.271Z",
+          "is_superuser": false,
+          "username": "test",
+          "first_name": "",
+          "last_name": "",
+          "email": "test@test.com",
+          "is_staff": false,
+          "is_active": true,
+          "date_joined": "2022-04-27T15:35:22.231Z",
+          "groups": [],
+          "user_permissions": []
+        }
+      }
+]

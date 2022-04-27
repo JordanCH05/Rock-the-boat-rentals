@@ -1,0 +1,28 @@
+[
+    {
+        "model": "currencies.currency",
+        "pk": "EUR",
+        "fields": {
+          "name": "Euro",
+          "symbol": "€",
+          "factor": "1.1895659900",
+          "is_active": true,
+          "is_base": false,
+          "is_default": false,
+          "info": "{}"
+        }
+      },
+      {
+        "model": "currencies.currency",
+        "pk": "GBP",
+        "fields": {
+          "name": "Pound Sterling",
+          "symbol": "£",
+          "factor": "1.0000000000",
+          "is_active": true,
+          "is_base": true,
+          "is_default": true,
+          "info": "{}"
+        }
+      }
+]

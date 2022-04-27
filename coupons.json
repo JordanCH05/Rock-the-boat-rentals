@@ -1,0 +1,13 @@
+[
+    {
+        "model": "discounts.coupon",
+        "pk": 1,
+        "fields": {
+          "code": "TEST",
+          "valid_from": "2022-04-27T16:49:05Z",
+          "valid_to": "2022-04-28T16:49:09Z",
+          "discount": 1,
+          "active": true
+        }
+      }
+]
