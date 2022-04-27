@@ -10,6 +10,7 @@ class Review(models.Model):
     boat = models.ForeignKey(
         Boat, on_delete=models.CASCADE, related_name='reviews')
     score = models.DecimalField(decimal_places=1, max_digits=2)
+    body = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
