@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load divide %}
 
 {% block extra_title %}| Add Boat{% endblock %}
 
@@ -25,7 +26,15 @@
 
         <div class="row">
             <div class="col-12 col-md-6">
+                
                 <form method="POST" action="{% url 'add_review' boat.id %}" class="form mb-2" enctype="multipart/form-data">
+                    <div>
+                        <h4 class="text-center">
+                            <div class="stars-outer">
+                                <div class='stars-inner w-'></div>
+                            </div>
+                        </h4>
+                    </div>
                     {% csrf_token %}
                     {{ review_form|crispy }}
                     <div class="text-right">
@@ -36,4 +45,18 @@
             </div>            
         </div>
     </div>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $("#id_score")[0].addEventListener('input', function() {
+            var score_input = $("#id_score")[0].value;
+            var stars = $('.stars-inner');
+            var rating = (score_input / 5) * 100;
+            var ratingRounded = `${Math.round
+            ((rating) / 10) * 10}%`;
+            stars[0].style.width = ratingRounded;
+        })
+    </script>
 {% endblock %}
