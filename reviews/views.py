@@ -12,11 +12,14 @@ def add_review(request, boat_id):
 
     boat = get_object_or_404(Boat, pk=boat_id)
     if request.method == 'POST':
-        review_form = ReviewForm(request.POST, instance=boat)
+        review_form = ReviewForm(request.POST, request.FILES)
         if review_form.is_valid():
-            review_form.save()
+            review = review_form.save(commit=False)
+            review.username = request.user
+            review.boat = boat
+            review.save()
             messages.success(request, 'Successfully reviewed boat!')
-            return redirect(reverse('profile'))
+            return redirect(reverse('product_detail', args=[boat.id]))
         else:
             messages.error(request, 'Failed to review boat.'
                            ' Please ensure the form is valid')
