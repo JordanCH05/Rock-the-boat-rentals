@@ -35,7 +35,7 @@ class BoatAdmin(admin.ModelAdmin):
         'material',
         ]
 
-    ordering = ('name',)
+    ordering = ('pk',)
 
 
 @admin.register(Category)
