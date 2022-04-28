@@ -192,6 +192,12 @@ body {
     color: #f8ce0b;
 }
 
+/* Mailchimp */
+
+#mc_embed_signup form {
+    padding: 0px!important;
+}
+
 /* -------------------------------- Media Queries */
 
 /* Slightly larger container on xl screens */
@@ -209,5 +215,25 @@ body {
 
     .bg-lg-white {
         background-color: white!important;
+    }
+}
+
+@media (max-width: 999px) {
+    .header-container {
+        padding-top: 117px;
+    }
+
+    #index-slogan {
+        font-size: 1.25rem;
+    }
+
+    #index-box {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .header-container {
+        padding-top: 146px;
     }
 }
