@@ -44,3 +44,9 @@
         </div>
     </div>
 {% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/add_edit_review_stars.js' %}">
+    </script>
+{% endblock %}
