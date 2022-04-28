@@ -27,7 +27,7 @@
                 <div class="image-container my-5">
                     {% if boat.image %}
                         <a href="{{ boat.image.url }}">
-                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ item.boat.image }}" alt="{{ boat.sku }}">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}{{ boat.image }}" alt="{{ boat.sku }}">
                         </a>
                     {% else %}
                         <a href="">
