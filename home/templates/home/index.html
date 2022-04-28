@@ -3,23 +3,32 @@
 
 
 {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
     </div>
+</div>
 {% endblock %}
 
 
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-7 col-md-6 my-auto">
-                <div>
-                    <a href="{% url 'products' %}" class="btn btn-primary rounded-0"><h1>Find an RC boat to add to your Fleet!</h1></a>
-                </div>
+<div class="container h-100">
+    <div class="row h-100">
+        <div class="col-7 col-md-6 my-auto">
+            <div>
+                <a href="{% url 'products' %}" class="flex-shrink-1 btn btn-primary rounded-0 w-75">
+                    <h1 id="index-slogan">Find an RC boat to add to your Fleet!</h1>
+                </a>
+            </div>
+            <div class="mt-2 p-2 bg-primary text-white w-75 d-none d-md-block">
+                <h2 id="index-box">Remote Control Boats, Ships, Submarines, Hovercraft and even Sharks!</h2>
             </div>
         </div>
     </div>
-    
+</div>
+
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/main-footer.html' %}
 {% endblock %}

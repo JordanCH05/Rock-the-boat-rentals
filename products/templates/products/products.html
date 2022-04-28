@@ -21,7 +21,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center mt-3">
-                <h1>Boats</h1>
+                <h1>RC Boats</h1>
                 {% for c in current_category %}
                     <h2>{{ c.friendly_name }}</h2>
                 {% endfor %}
@@ -61,9 +61,9 @@
                             <div class="card border-0 h-100">
                                 <div class="card-body pb-0 d-flex flex-column position-relative">
                                     {% if boat.image %}
-                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}{{ boat.image }}" alt="{{ boat.sku }}">
+                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}{{ boat.image }}" alt="{{ boat.name }}">
                                     {% else %}
-                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default_no_image.jpg" alt="{{ boat.sku }}">
+                                        <img class="card-img-top flex-shrink-1 rounded" style="object-fit: cover;" src="{{ MEDIA_URL }}default_no_image.jpg" alt="{{ boat.name }}">
                                     {% endif %}
                                     <a href="{% url 'product_detail' boat.id %}" class="stretched-link"></a>
                                 </div>
@@ -145,6 +145,10 @@
     <div id="top-page-btn" class="btn btn-primary col-12 border-primary rounded-0">
         <i class="fas fa-arrow-up mx-auto my-auto py-2"></i>
     </div>
+{% endblock %}
+
+{% block footer %}
+{% include 'includes/main-footer.html' %}
 {% endblock %}
 
 {% block postloadjs %}
