@@ -100,7 +100,7 @@
                         </table>
                     </div>
             </div>
-            <div class="col-12">
+            <div class="col-12 my-2 text-right">
                 <form action="{% url 'apply_coupon' %}" method="POST">
                     {% csrf_token %}
                     {{ coupon_form }}
