@@ -49,7 +49,7 @@
                                 <a href="{% url 'product_detail' item.boat.id %}">
                                     {% if item.boat.image %}
                                         <a href="{{ item.boat.image.url }}">
-                                            <img class="img-fluid" src="{{ item.boat.image.url }}" alt="{{ item.boat.sku }}">
+                                            <img class="img-fluid" src="{{ MEDIA_URL }}{{ item.boat.image }}" alt="{{ item.boat.sku }}">
                                         </a>
                                     {% else %}
                                         <a href="">
