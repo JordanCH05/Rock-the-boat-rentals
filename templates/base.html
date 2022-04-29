@@ -127,13 +127,13 @@
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
-                                    {{ symbol }}{{ grand_total|floatformat:2|intcomma }}
+                                        {{ symbol }}{{ grand_total|floatformat:2|intcomma }}
                                     {% else %}
-                                    {% if current_cur in suffix_cur %}
-                                    0.00 {{ symbol }}
-                                    {% else %}
-                                    {{ symbol }}0.00
-                                    {% endif %}
+                                        {% if current_cur in suffix_cur %}
+                                            0.00 {{ symbol }}
+                                        {% else %}
+                                            {{ symbol }}0.00
+                                        {% endif %}
                                     {% endif %}
                                 </p>
                             </div>

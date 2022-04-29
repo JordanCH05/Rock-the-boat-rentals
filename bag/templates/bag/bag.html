@@ -7,11 +7,11 @@
 {% block extra_title %}| Fleet{% endblock %}
 
 {% block page_header %}
-    <div class="container header-container">
-        <div class="row">
-            <div class="col"></div>
-        </div>
+<div class="container header-container">
+    <div class="row">
+        <div class="col"></div>
     </div>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -26,98 +26,102 @@
     </div>
     <div class="row">
         {% if fleet_items %}
-            <div class="col-12">
-                <div class="d-block d-md-none">
-                        <div class="row">
-                            <div class="col">
-                                {% include "bag/includes/bag-totals.html" %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col my-1">
-                                {% include 'bag/includes/coupon-form.html' %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                {% include "bag/includes/checkout-buttons.html" %}
-                                <p class="text-muted mb-5">A summary of your bag contents is below</p>
-                            </div>
-                        </div>
-                        {% for item in fleet_items %}
-                            <div class="row">
-                                <div class="col-12 col-sm-6 mb-2">
-                                    {% include "bag/includes/product-image.html" %}
-                                </div>
-                                <div class="col-12 col-sm-6 mb-2">
-                                    {% include "bag/includes/product-info.html" %}
-                                </div>
-                                <div class="col-12 col-sm-6 order-sm-last">
-                                    <p class="my-0">Price Each:</p>
-                                        {% divide factor item.boat.currency.factor as converter %}
-                                        {% multiply item.boat.price converter as price %}
-                                        {% if current_cur in suffix_cur %}
-                                            <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
-                                        {% else %}
-                                            <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
-                                        {% endif %}
-                                    <p><strong>Subtotal: </strong></p>
-                                        {% if current_cur in suffix_cur %}
-                                        <p>{% multiply price item.quantity %} {{ symbol }}</p>
-                                    {% else %}
-                                        <p>{{ symbol }}{% multiply price item.quantity %}</p>
-                                    {% endif %}
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    {% include "bag/includes/quantity-form.html" %}
-                                </div>
-                            </div>
-                            <div class="row"><div class="col"><hr></div></div>
-                        {% endfor %}
+        <div class="col-12">
+            <div class="d-block d-md-none">
+                <div class="row">
+                    <div class="col">
+                        {% include "bag/includes/bag-totals.html" %}
+                    </div>
                 </div>
-                <div class="table-responsive rounded d-none d-md-block">
-                    <table class="table table-borderless table-sm">
-                        <thead>
-                            <tr>
-                                <th>Boat Info</th>
-                                <th></th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                            </tr>
-                        </thead>
-                        {% for item in fleet_items %}
-                            <tr>
-                                <td class="p-3 w-25">
-                                    {% include 'bag/includes/product-image.html' %}
-                                </td>
-                                <td class="py-3">
-                                    {% include 'bag/includes/product-info.html' %}
-                                </td>
-                                <td>
-                                    {% divide factor item.boat.currency.factor as converter %}
-                                    {% multiply item.boat.price converter as price %}
-                                    {% if current_cur in suffix_cur %}
-                                        <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
-                                    {% else %}
-                                        <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
-                                    {% endif %}
-                                </td>
-                                <td>
-                                    {% include "bag/includes/quantity-form.html" %}
-                                </td>
-                                <td>
-                                    {% if current_cur in suffix_cur %}
-                                        <p>{% multiply price item.quantity %} {{ symbol }}</p>
-                                    {% else %}
-                                        <p>{{ symbol }}{% multiply price item.quantity %}</p>
-                                    {% endif %}
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
+                <div class="row">
+                    <div class="col my-1">
+                        {% include 'bag/includes/coupon-form.html' %}
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        {% include "bag/includes/checkout-buttons.html" %}
+                        <p class="text-muted mb-5">A summary of your bag contents is below</p>
+                    </div>
+                </div>
+                {% for item in fleet_items %}
+                <div class="row">
+                    <div class="col-12 col-sm-6 mb-2">
+                        {% include "bag/includes/product-image.html" %}
+                    </div>
+                    <div class="col-12 col-sm-6 mb-2">
+                        {% include "bag/includes/product-info.html" %}
+                    </div>
+                    <div class="col-12 col-sm-6 order-sm-last">
+                        <p class="my-0">Price Each:</p>
+                        {% divide factor item.boat.currency.factor as converter %}
+                        {% multiply item.boat.price converter as price %}
+                        {% if current_cur in suffix_cur %}
+                        <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
+                        {% else %}
+                        <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
+                        {% endif %}
+                        <p><strong>Subtotal: </strong></p>
+                        {% if current_cur in suffix_cur %}
+                        <p>{% multiply price item.quantity %} {{ symbol }}</p>
+                        {% else %}
+                        <p>{{ symbol }}{% multiply price item.quantity %}</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        {% include "bag/includes/quantity-form.html" %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
+            <div class="table-responsive rounded d-none d-md-block">
+                <table class="table table-borderless table-sm">
+                    <thead>
+                        <tr>
+                            <th>Boat Info</th>
+                            <th></th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    {% for item in fleet_items %}
+                    <tr>
+                        <td class="p-3 w-25">
+                            {% include 'bag/includes/product-image.html' %}
+                        </td>
+                        <td class="py-3">
+                            {% include 'bag/includes/product-info.html' %}
+                        </td>
+                        <td>
+                            {% divide factor item.boat.currency.factor as converter %}
+                            {% multiply item.boat.price converter as price %}
+                            {% if current_cur in suffix_cur %}
+                            <p>{{ price|floatformat:"2"|intcomma }} {{ symbol }}</p>
+                            {% else %}
+                            <p>{{ symbol }}{{ price|floatformat:"2"|intcomma }}</p>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% include "bag/includes/quantity-form.html" %}
+                        </td>
+                        <td>
+                            {% if current_cur in suffix_cur %}
+                            <p>{% multiply price item.quantity %} {{ symbol }}</p>
+                            {% else %}
+                            <p>{{ symbol }}{% multiply price item.quantity %}</p>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
     </div>
     <div class="row d-none d-md-block">
         <div class="col-12 my-2 text-right">
@@ -130,31 +134,35 @@
             {% include "bag/includes/bag-totals.html" %}
         </div>
     </div>
-            
-        {% else %}
-            <p>Your fleet is empty</p>
-            <a href="{% url 'products' %}" class="btn btn-primary">
-                Find a Boat to add to your Fleet
-            </a>
-        {% endif %}
-    
+</div>
+{% else %}
+<p>Your fleet is empty</p>
+<a href="{% url 'products' %}" class="btn btn-primary">
+    Find a Boat to add to your Fleet
+</a>
+{% endif %}
+</div>
+
+
 {% endblock %}
 
 {% block postloadjs %}
 {{ block.super }}
 {% include 'products/includes/quantity_input_script.html' %}
-    <script type="text/javascript">
-        // Remove item and reload on click
-    $('.remove-item').click(function(e) {
+<script type="text/javascript">
+    // Remove item and reload on click
+    $('.remove-item').click(function (e) {
         var csrfToken = "{{ csrf_token }}";
         var itemId = $(this).attr('id').split('remove_')[1];
         var url = `/bag/remove/${itemId}/`;
-        var data = {'csrfmiddlewaretoken': csrfToken};
+        var data = {
+            'csrfmiddlewaretoken': csrfToken
+        };
 
         $.post(url, data)
-         .done(function() {
-             location.reload();
-         }) 
+            .done(function () {
+                location.reload();
+            })
     });
-    </script>
+</script>
 {% endblock %}
