@@ -2,7 +2,9 @@ import stripe
 import json
 from decimal import Decimal
 
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+    )
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -130,7 +132,7 @@ def checkout(request):
             currency=currency,
         )
 
-        # Attempt to prefill the form with any info the user maintains in 
+        # Attempt to prefill the form with any info the user maintains in
         # their profile
         if request.user.is_authenticated:
             try:

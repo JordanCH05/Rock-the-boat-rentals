@@ -77,7 +77,11 @@ def delete_review(request, review_id):
     boat = review.boat
 
     if request.user != review.username:
-        messages.error(request, 'Sorry, this is not your review. Please login to correct user in order to delete')
+        messages.error(
+            request,
+            'Sorry, this is not your review.'
+            'Please login to correct user in order to delete'
+            )
         return redirect(reverse('product_detail', args=[boat.id]))
 
     review.delete()
