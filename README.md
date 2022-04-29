@@ -95,10 +95,6 @@ As a store owner I would like to be able to...
 
 ![Colour Scheme](media/colour-scheme.png)
 
-* Figma
-
-    * wireframes
-
 ## Features
 
 * Index
@@ -144,7 +140,7 @@ As a store owner I would like to be able to...
 
     * Footer
         * A link to the website's Facebook page, encouraging users to like and follow
-        * A call to action to join the website's mailing list using MailChimp
+        * A call to action to join the website's mailing list using MailChimp to recieve extra info and discount codes
         * An arrow button at the top of the footer is provided to jump back to the top of the page
 
 ![Footer](media/social-mail.png)
@@ -209,6 +205,8 @@ As a store owner I would like to be able to...
 
     * Be reminded how close you are to the delivery threshold so encourage users who have not reached the threshold to purchase more
 
+![Bag Page](media/bag.png)
+
 * Checkout
 
     * Can view the items about to be purchased and their subtotals
@@ -221,6 +219,8 @@ As a store owner I would like to be able to...
 
     * Sends a webhook to [stripe](stripe.com) incase the user closes the site before the form is submitted and the webhook can recreate the order if it iis not found to prevent being charged without the order going through
 
+![Checkout Page](media/checkout.png)
+
 * Reviews
 
     * Create reviews with resposive stars to represent score
@@ -229,13 +229,11 @@ As a store owner I would like to be able to...
 
     * Edit and delete links hidden for reviews made by other users
 
-
+![Add/Edit Review Page](media/review.png)
 
 ## Future Features
 
-* Delete modal
-
-## Django Apps and Models
+* Allow admins to generate discount codes for their site instead of having to rely on the admin site
 
 ## Testing
 
@@ -296,8 +294,9 @@ As a store owner I would like to be able to...
 * PIP to install packages
 * Postgresql for the database to create content and manage data
 * Heroku used for deployment
-* Stripe used for handling payments and webhooks
-* AWS used for cloud hosting for static and media files
+* [Stripe](https://stripe.com/gb) used for handling payments and webhooks
+* [AWS](https://aws.amazon.com/) used for cloud hosting for static and media files
+* [MailChimp](https://mailchimp.com/en-gb/) used to newsletter emails
 
 ### Required modules
 
