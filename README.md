@@ -1,108 +1,317 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Rock the Boat Revival
 
-Welcome JordanCH05,
+This website has been created for users to buy and review a selection of RC Boats.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+The live site can be found [here](https://rock-the-boat.herokuapp.com/)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+![Responsive Mockup of site](media/mockup.png)
 
-## Gitpod Reminders
+## Table of Contents
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+* [User Experience](#user-experience)
 
-`python3 -m http.server`
+    * [User stories](#user-stories)
+    * [Admin Stories](#admin-stories)
 
-A blue button should appear to click: _Make Public_,
+* [Planning](#planning)
 
-Another blue button should appear to click: _Open Browser_.
+* [Features](#features)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+* [Future Features](#future-features)
 
-A blue button should appear to click: _Make Public_,
+* [Django apps and models](#django-apps-and-models)
 
-Another blue button should appear to click: _Open Browser_.
+* [Testing](#testing)
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+* [Languages and Programs Used](#languages-and-programs-used)
 
-To log into the Heroku toolbelt CLI:
+    * [Languages](#languages)
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+    * [Libraries and Frameworks](#libraries-and-frameworks)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+    * [Development tools](#development-tools)
 
-------
+    * [Required modules](#required-modules)
 
-## Release History
+* [Credits](#credits)
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+## User Experience
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+### User stories
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+As a user I would like to be able to...
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+* Products
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+    * View all products so that I can select some to purchase
+    * View a paginated list of products so that I can view a select few at a time without having to scroll too much
+    * View individual product details so that I can see the price, size, location and other details more clearly
+* Profile
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+    * Register for an account so that I can have a personal account and view my profile
+    * Login and logout easily so that I can access my personal account and logout to prevent others from accessing it
+    * Have a personalised profile so that I can view my order history and reviews
+* Bag
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+    * Keep track of all the products I am wanting to purchase so that I can continue shopping and purchase 
+    * See the total price of my purchases so that I can keep track of how much I'm spending and avoid spending too much
+* Currency
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+    * Change currency so that I understand the cost of my purchases in my local currency
+* Filter & Sort
+    * Filter by category so that I can easily find the product I want within the categories I want
+    * Search for a product so that I can find a specific product to buy
+    * Sort a list of products so that I can easily identify the best priced and categories that I want
+* Reviews
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+    * View a list of reviews so that I can see other shoppers opinions
+    * Leave a review for a game so that my opinion is heard and I can be involved in rating the game
+    * Edit or delete my review in order to show my change of opinion or remove mistakes
+* Discounts
+    * Enter discount codes so that I can save money when buying products
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### Shop Owner Stories
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+As a store owner I would like to be able to...
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+* Products
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+    * Add new products so that I can sell new products
+    * Edit products so that I can adjust product details
+    * Delete products so that I can remove products that are no longer being sold
+    * Secure the site so that I can prevent unauthorised users from adding/editing/deleting products
+* Reviews
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+    * Secure the reviews so that I can prevent users from being able to delete other users reviews
+    * Only allow users to review products they've bought to prevent false reviews
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+## Planning
 
-## FAQ about the uptime script
+* Colour scheme
 
-**Why have you added this script?**
+* Fonts
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+* Fimga
 
-**How will this affect me?**
+## Features
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+* Index
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+    * Logo
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+    * Search Bar
 
-**So….?**
+    * Nav
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+        * Currency
+        * Profile
+        * Bag
+        * Categories
+        * Sorting
 
-**Can I opt out?**
+    * Banner
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+    * Slogan and Image
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+    * Footer
 
-**Anything more?**
+* Products
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+    * Sorting
 
----
+    * List of products
 
-Happy coding!
+    * Pagination
+
+    * Top of page arrow
+
+* Product Detail
+
+    * Full Product Info
+
+    * Edit/Delete Buttons
+
+    * Quantity and add to bag
+
+    * Reviews
+
+* Add/Edit product
+
+    * Admin can add and edit products on these templates
+    * Secured so that only an admin can access these pages
+
+* Profile
+
+    * Saved Delivery Information
+
+    * Order History
+
+    * Purchased Boats to review
+
+    * Review History
+
+* Bag
+
+    * View all products currently in the fleet before purchasing
+
+    * Can ajust quantity because buying
+
+    * Can remove items no longer wanted
+
+    * Can apply discount codes and see how much you've saved
+
+    * Be reminded how close you are to the delivery threshold
+
+* Checkout
+
+    * Can fill in delivery information
+
+    * Can save delivery information to profile
+
+    * Checkout success page to view purchase and doubles as order history detail page
+
+* Reviews
+
+    * Create reviews with resposive stars to represent score
+
+    * Can edit previous reviews
+
+    * Edit and delete links hidden for reviews made by other users
+
+
+
+## Future Features
+
+* Delete modal
+
+## Django Apps and Models
+
+## Testing
+
+### HTML
+
+* Tested using the official [W3C Validator](https://validator.w3.org/)
+
+### CSS
+
+* Tested using the official [Jigsaw W3C Validator](https://jigsaw.w3.org/css-validator/validator)
+
+### JavaScript
+
+* Tested using [JSHint JavaScript Validator](https://jshint.com/)
+
+### Browsers
+
+* Tested on Google Chrome, Internet Explorer, Microsoft Edge and even the Samsung Internet App on Mobile and Tablet
+
+### Responsiveness
+
+* Tested responsiveness on a Samsung A21 Phone, Samsung Galaxy Tablet and Desktop
+* Tested with Google Chrome Development tools for different screen sizes
+
+### Accessibility
+
+* Tested using a web accessibility evaluation tool called [Wave](https://wave.webaim.org/)
+* Semantic HTML is used
+
+## Languages and Programs Used
+
+### Languages
+
+* HTML5 for site structure
+* CSS3 for styling
+* JavaScript for star ratings and message timeouts
+* Python 3.0 for Django
+
+### Libraries and Frameworks
+
+* [Django](https://www.djangoproject.com/)'s model view template structure was used to create apps and run them
+* [Boostrap4](https://getbootstrap.com/docs/4.5/getting-started/introduction/) framework used for responsive styling and templates
+
+### Development tools
+* Git for version control
+* VS Code as IDE (integrated development environment)
+* PIP to install packages
+* Postgresql for the database to create content and manage data
+* Heroku used for deployment
+* Stripe used for handling payments and webhooks
+* AWS used for cloud hosting for static and media files
+
+### Required modules
+
+All modules required are located in the [requirements.txt](requirements.txt) file.
+
+## Deployment
+
+### Heroku
+
+Create Heroku App
+
+    1. Create Heroku account and login
+    2. Click new then create new app
+    3. Name app a unique name
+    4. Select your region most appropriate for you
+
+Link Gitpod workspace to Heroku App \
+(Heroku have removed the functionality to deploy Github apps through the Heroku Dashboard)
+
+    1. In the gitpod terminal run the commad 'heroku login -i'
+    2. Login with your email and password
+    3. Run the command 'heroku git:remote -a your_app_name_here', replacing 'your_app_name_here' with your app name
+    4. Automatic deployments are no longer available at time of writing so after each 'git push' you need to also run 'git push heroku main' to manually deploy
+
+Add Postgresql Database
+
+    1. Click onto the Resources Tab
+    2. Under Add ons search for Heroku Postgres
+    3. Select Hobby Dev - Free plan
+    4. Submit order form
+
+Set Environment Variables
+
+    1. Click onto the Settings tab
+    2. Click reveal Config Vars.
+    3. Add the variables below
+    4. Set them as follows
+
+|Key | Value|
+--- | ---|
+|AWS_ACCESS_KEY_ID | (AWS Access key)|
+|AWS_SECRET_ACCESS_KEY | (AWS Secret Access key)|
+|DATABASE_URL | (Postgresql Database url)|
+|EMAIL_HOST_PASS | (Email Host password)|
+|EMAIL_HOST_USER | (Email Address)|
+|SECRET_KEY | (Secret Key value)|
+|STRIPE_PUBLIC_KEY | (Stripe Public Key value)|
+|STRIPE_SECRET_KEY | (Stripe Secret Key value)|
+|STRIPE_WH_SECRET | (Stripe WH Key value)|
+|USE_AWS | True|
+
+### AWS Configuration
+
+Amazon AWS S3 Bucket
+
+    1. Creat an AWS account and login
+    2. Go to Services then S3
+    3. Create an S3 bucket
+    4. Untick 'Block all public access' to make is publically accessable
+    5. Create and apply bucket policy, Cross-origin resource sharing (CORS), Access Control List (ACL)
+    6. Go to services then IAM
+    7. Go to policies and create bucket policy
+    8. Add a JSON file with your policy arn in the Resource
+    9. Creat User Group and User to manage the S3 bucket
+    10. Upload media files into the S3 bucket through the AWS console
+    11. Copy the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY values to the Config Vars in Heroku.
+
+## Credits
+
+* RC Boat images and data was used from [Zeptronics](https://www.zeptotronics.net/)
+* JavaScript code for star ratings is based on code from [Brad Traversy](https://codepen.io/bradtraversy/pen/GQLRZv)
+* Pagination styling based on [Codemy.com](https://www.youtube.com/channel/UCFB0dxMudkws1q8w5NJEAmw)'s video on Pagination
+* [Bootstrap cheatsheet](https://hackerthemes.com/bootstrap-cheatsheet/) helped by listing boostrap classes in an easy to find manner
+* [Boostrap Templates and Examples](https://getbootstrap.com/docs/5.1/examples/) used as a basis for some features
+* [Font Awesome](https://fontawesome.com/) used for the stars
+* [W3Schools](https://www.w3schools.com/) used for reference in using coding [languages](#languages)
+* [Stack Overflow](https://stackoverflow.com/) was used to find solution to some coding issues
+* The [Code Institute](https://codeinstitute.net/) study material was used
