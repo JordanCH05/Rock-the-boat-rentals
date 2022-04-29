@@ -1,0 +1,9 @@
+{% if item.boat.image %}
+    <a href="{{ item.boat.image.url }}">
+        <img class="img-fluid" src="{{ MEDIA_URL }}{{ item.boat.image }}" alt="{{ item.boat.name }}">
+    </a>
+{% else %}
+    <a href="">
+        <img class="img-fluid" src="{{ MEDIA_URL }}default_no_image.jpg" alt="{{ item.boat.name }}">
+    </a>
+{% endif %}

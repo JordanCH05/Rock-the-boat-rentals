@@ -1,0 +1,5 @@
+<form action="{% url 'apply_coupon' %}" method="POST">
+    {% csrf_token %}
+    {{ coupon_form }}
+    <button type="submit" class="btn btn-info">Apply</button>
+</form>

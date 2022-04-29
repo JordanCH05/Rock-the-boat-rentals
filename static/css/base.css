@@ -60,6 +60,10 @@ body {
 	z-index: -1;
 }
 
+.mw-190 {
+    max-width: 190px;
+}
+
 /* ------------------------------- bootstrap toasts */
 
 .message-container {

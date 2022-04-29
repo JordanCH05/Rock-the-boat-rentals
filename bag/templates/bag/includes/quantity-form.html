@@ -2,8 +2,8 @@
     {% csrf_token %}
     <div class="form-row">
         <div class="col-12">
-            <div class="form-group w-50">
-                <div class="input-group">
+            <div class="form-group mw-190">
+                <div class="input-group input-group-{{ item.boat.id }}">
                     <div class="input-group-prepend">
                         <button class="decrement-qty btn btn-primary rounded-0 decrement-qty_{{ item.boat.id }}" 
                             data-item_id="{{ item.boat.id }}">
@@ -27,8 +27,9 @@
             </div>
         </div>
 
-        <div class="col mt-2">
-            <input type="submit" class="btn rounded-0 text-uppercase mt-5" value="Adjust Quantity">
+        <div class="col">
+            <input type="submit" class="btn rounded-0 text-info" value="Update"> | 
+            <a class="btn remove-item text-danger" id="remove_{{ item.boat.id }}">Remove</a>
         </div>
         <input type="hidden" name="redirect_url" value="{{ request.path }}">
     </div>

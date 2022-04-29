@@ -1,0 +1,19 @@
+<p><strong>{{ item.boat.name }}</strong></p>
+{% if item.boat.brand %}
+    <p><strong>Brand:</strong> {{ item.boat.brand }}</p>
+{% endif %}
+{% if item.boat.state_of_assembly %}
+    <p><strong>State of Assembly:</strong> {{ item.boat.state_of_assembly }}</p> 
+{% endif %}
+{% if item.boat.power_source %}
+    <p><strong>Power Source:</strong> {{ item.boat.power_source }}</p>
+{% endif %}
+{% if item.boat.age_range %}
+    <p><strong>Age Range:</strong> {{ item.boat.age_range }}+</p>
+{% endif %}
+{% if item.boat.dimensions %}
+    <p><strong>Dimensions:</strong> {{ item.boat.dimensions }}</p>
+{% endif %}
+{% if item.boat.material %}
+    <p><strong>Materials:</strong> {{ item.boat.material }}</p>
+{% endif %}
