@@ -225,6 +225,10 @@ body {
         padding-top: 205px;
     }
 
+    .footer-container {
+        padding-bottom: 476px;
+    }
+
     .bg-lg-white {
         background-color: white!important;
     }
