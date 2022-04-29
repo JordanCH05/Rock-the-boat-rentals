@@ -90,86 +90,136 @@ As a store owner I would like to be able to...
 
 * Colour scheme
 
-* Fonts
+    * Using colours with a good contrast ratio for legibility
+    * The colours also match the main background image on the index page
 
-* Fimga
+![Colour Scheme](media/colour-scheme.png)
+
+* Figma
+
+    * wireframes
 
 ## Features
 
 * Index
 
     * Logo
+        * The logo was made using [Canva](https://www.canva.com/)
+        * Used as a link to return to the home page
+        * Primarily using #226699 and #F28E44 colours to contrast with the white background
+
+![Logo wuth anchor inside a ship's wheel](media/logo.png)
+        
 
     * Search Bar
 
+        * A search bar available on all page headers
+        * Filters products with boat data that contains the search terms
+
+![Search Box](media/search-box.png)
+
     * Nav
 
-        * Currency
-        * Profile
-        * Bag
-        * Categories
-        * Sorting
+        * A drop down menu to choose between currencies
+        * Once an item is in the bag the currency cannot be changed to avoid Orders with multiple currencies
+        * A drop down menu to Signup, Login or Logout depending on the login status
+        * A grand total keeping track of the products the user has selected in their chosen currency
+        
+
+![Navigation](media/nav.png)
 
     * Banner
 
+        * A drop down list of all the categories to filter the products
+        * A drop down list of options for sorting all the products as well as a link to the default 'all boats'
+        * A banner reminding the user of the free shipping threshold to encourage the user to spend more
+
+![Banner](media/banner.png)
+
     * Slogan and Image
+        * A slogan to tell the user what the website is about as well as use SEO key words relevant to what is being sold
+        * A nice background image for the index page that matches the colour scheme of the site and gives the user an idea of what is being sold
+
+![Main Image and slogan](media/index-image.png)
 
     * Footer
+        * A link to the website's Facebook page, encouraging users to like and follow
+        * A call to action to join the website's mailing list using MailChimp
+        * An arrow button at the top of the footer is provided to jump back to the top of the page
+
+![Footer](media/social-mail.png)
 
 * Products
 
-    * Sorting
+    * More sorting options in a dropdown menu offering descending and ascending order
 
-    * List of products
+    * List of all products with some info on each RC Boat ordering my the amount of views each has gotten to that the most popular start at the top
 
-    * Pagination
+    * The products are paginated when more than 8 fit a screen, more pages are made for more products. If there are too many pages to show then the paginator will only show the previous and next 5 pages as well as links to the first and last page
 
-    * Top of page arrow
+    * If a url is inserted with a page number that is larger than the total then the user will be redirected to the last page
+
+    * If a url is inserted with a non integer as the page number or the page is not found then the user will be redirected to the first page
+
+![Products page](media/products.png)
 
 * Product Detail
 
-    * Full Product Info
+    * A user is able to see all the products details in this template
 
-    * Edit/Delete Buttons
+    * Edit and Delete Buttons are on this page and the previous for admin uses to quickly edit or delete products and they are restricted to no superusers
 
-    * Quantity and add to bag
+    * A user can select the quantity of the product they wish to add to their bag before they submit it
 
-    * Reviews
+    * Users are able to view reviews given to this product, but are only able to create review if they are signed in and if they have bought the RC Boat in an order, which gives them and edd review button in their profile
+
+    * Users can edit and delete their reviews with the edit and delete buttons but these button are restricted for reviews they have not written
+
+![Product Detail Page](media/product-detail.png)
 
 * Add/Edit product
 
     * Admin can add and edit products on these templates
     * Secured so that only an admin can access these pages
+    * And if editing the product the admin can see a preview of the product image instead of just a url
 
 * Profile
 
-    * Saved Delivery Information
+    * During an order or on this profile page a user, if signed in, can saved their delivery information to be saved for a future order to prevent having to fill it in everytime if the save info button is ticked
 
-    * Order History
+    * Their delivery information can be editted on this page too
 
-    * Purchased Boats to review
+    * A user can view their order history and can click on them and see the full details of the order
 
-    * Review History
+    * The user can see a list of boughts they have bought in the past and is given add review buttons for each now that they have purchased them. This is to prevent false reviews from users who have not purchased the product
+
+    * The user can also see all reviews they have created on the site and can edit or delete them from this page
+
+![Profile page]()
 
 * Bag
 
     * View all products currently in the fleet before purchasing
 
-    * Can ajust quantity because buying
+    * Can ajust quantity of product before heading to checkout
 
-    * Can remove items no longer wanted
+    * Can remove products no longer wanted
 
     * Can apply discount codes and see how much you've saved
 
-    * Be reminded how close you are to the delivery threshold
+    * Be reminded how close you are to the delivery threshold so encourage users who have not reached the threshold to purchase more
 
 * Checkout
 
+    * Can view the items about to be purchased and their subtotals
+
     * Can fill in delivery information
 
-    * Can save delivery information to profile
+    * Can save delivery information to profile to be used again next time
 
-    * Checkout success page to view purchase and doubles as order history detail page
+    * Checkout success page to view order and confirm it went through correctly and doubles as order history detail page
+
+    * Sends a webhook to [stripe](stripe.com) incase the user closes the site before the form is submitted and the webhook can recreate the order if it iis not found to prevent being charged without the order going through
 
 * Reviews
 
@@ -203,6 +253,12 @@ As a store owner I would like to be able to...
 
 * Tested using [JSHint JavaScript Validator](https://jshint.com/)
 * Added missing semicolons
+
+### Python
+
+* Testing using flake8
+* Shortened lines that were too long
+* Removed imports that were not used
 
 ### Browsers
 
