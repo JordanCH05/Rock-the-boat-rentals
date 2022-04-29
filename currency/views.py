@@ -13,7 +13,7 @@ def change_currency(request, currency, redirect_url=''):
         messages.warning(
             request,
             "Please empty your empty your fleet before changing currencies")
-        return redirect(redirect_url)
+        return redirect(reverse('products'))
     else:
         currencies = []
         filt_cur = Currency.objects.values()
@@ -22,7 +22,7 @@ def change_currency(request, currency, redirect_url=''):
         if currency in currencies:
             request.session['currency'] = currency
             messages.success(request, f"Currency changed to {currency}")
-            return redirect(redirect_url)
+            return redirect(reverse('products'))
         else:
             messages.error(request,
                            f"Sorry, we don't use this currency: {currency}")
