@@ -45,7 +45,7 @@ class Boat(models.Model):
     dimensions = models.CharField(max_length=254, null=True, blank=True)
 
     class Meta:
-        ordering = ['-image', '-views']
+        ordering = ['-views']
 
     def __str__(self):
         return str(self.sku)
