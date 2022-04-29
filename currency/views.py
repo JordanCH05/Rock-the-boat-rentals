@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, reverse
 from django.contrib import messages
 from currencies.models import Currency
 from bag.contexts import fleet_contents
@@ -26,4 +26,4 @@ def change_currency(request, currency, redirect_url=''):
         else:
             messages.error(request,
                            f"Sorry, we don't use this currency: {currency}")
-            return redirect(redirect_url)
+            return redirect(reverse('products'))
