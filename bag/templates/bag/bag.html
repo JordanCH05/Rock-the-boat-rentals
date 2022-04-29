@@ -83,7 +83,7 @@
                                         {% endif %}
                                     </td>
                                     <td>
-                                        <p>x{{ item.quantity }}</p>
+                                        {% include "bag/includes/quantity-form.html" %}
                                     </td>
                                     <td>
                                         {% if current_cur in suffix_cur %}
@@ -159,6 +159,7 @@
 
 {% block postloadjs %}
 {{ block.super }}
+{% include 'products/includes/quantity_input_script.html' %}
     <script type="text/javascript">
         // Remove item and reload on click
     $('.remove-item').click(function(e) {

@@ -37,6 +37,26 @@ def add_to_bag(request, boat_id):
     return redirect(redirect_url)
 
 
+def adjust_bag(request, boat_id):
+    """ Adjust boat quantity in the shopping bag """
+
+    boat = get_object_or_404(Boat, pk=boat_id)
+    redirect_url = request.POST.get('redirect_url')
+    quantity = int(request.POST.get('quantity'))
+    fleet = request.session.get('fleet', {})
+
+    if quantity > 0:
+        fleet[boat.sku] = quantity
+        messages.info(request, f'Updated quantity of: {boat.name}')
+    else:
+        fleet.pop(boat.sku)
+        messages.success(request, f'Added to your fleet: {boat.name}')
+
+    request.session['fleet'] = fleet
+
+    return redirect(redirect_url)
+
+
 def remove_from_bag(request, boat_id):
     """ Remove a boat from the shopping bag """
 
