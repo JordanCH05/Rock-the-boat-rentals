@@ -48,7 +48,7 @@
                             <td class="col-2 mb-1">
                                 <a href="{% url 'product_detail' item.boat.id %}">
                                     {% if item.boat.image %}
-                                        <a href="{{ item.boat.image.url }}">
+                                        <a href="{{ item.boat.image.url }}" aria-label="Image for {{ boat.sku }}">
                                             <img class="img-fluid" src="{{ MEDIA_URL }}{{ item.boat.image }}" alt="{{ item.boat.name }}">
                                         </a>
                                     {% else %}
@@ -151,7 +151,7 @@
 							</span>
 							<span class="font-weight-bold">Adjust Fleet</span>
 						</a>
-						<button id="submit-button" class="btn btn-primary rounded-0">
+						<button id="submit-button" class="btn btn-primary rounded-0" aria-label="Submit">
 							<span class="font-weight-bold">Complete Order</span>
 							<span class="icon">
 								<i class="fas fa-lock"></i>

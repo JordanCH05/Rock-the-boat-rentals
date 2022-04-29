@@ -63,12 +63,12 @@ def all_products(request):
 
                 q = (Q(sku__icontains=term) |
                      Q(category__name__icontains=term) |
-                     Q(manufacturer__icontains=term) |
-                     Q(condition__icontains=term) |
-                     Q(fuel__icontains=term) |
-                     Q(year_built__icontains=term) |
+                     Q(brand__icontains=term) |
+                     Q(state_of_assembly__icontains=term) |
+                     Q(power_source__icontains=term) |
+                     Q(age_range__icontains=term) |
                      Q(material__icontains=term) |
-                     Q(location__icontains=term)
+                     Q(speed__icontains=term)
                      )
 
                 queries.append(q)

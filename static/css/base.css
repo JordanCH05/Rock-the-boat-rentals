@@ -8,6 +8,14 @@ body {
     height: calc(100vh - 205px);
 }
 
+.bg-primary {
+    background-color: #0054AD!important;
+}
+
+.page-link {
+    color: #0054AD!important;
+}
+
 /* from Bulma */
 .icon {
     align-items: center;
@@ -32,13 +40,13 @@ body {
 /* Buttons */
 
 .btn-primary, .btn-primary:active {
-    background-color: #007bff;
+    background-color: #0054AD;
     color: white;
 }
 
 .btn-primary:hover {
     background-color: white;
-    color: #007bff;
+    color: #0054AD;
 }
 
 .btn-danger:hover {

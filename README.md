@@ -192,10 +192,12 @@ As a store owner I would like to be able to...
 ### HTML
 
 * Tested using the official [W3C Validator](https://validator.w3.org/)
+* Removed Duplicate Ids
+* Put li elements into a ul element
 
 ### CSS
 
-* Tested using the official [Jigsaw W3C Validator](https://jigsaw.w3.org/css-validator/validator)
+* Tested using the official [Jigsaw W3C Validator](https://jigsaw.w3.org/css-validator/)
 
 ### JavaScript
 
@@ -214,6 +216,8 @@ As a store owner I would like to be able to...
 
 * Tested using a web accessibility evaluation tool called [Wave](https://wave.webaim.org/)
 * Semantic HTML is used
+* Changed main background colour to #0054AD for a better contrast ratio
+* Added aria-labels and alt texts
 
 ## Languages and Programs Used
 
