@@ -202,6 +202,7 @@ As a store owner I would like to be able to...
 ### JavaScript
 
 * Tested using [JSHint JavaScript Validator](https://jshint.com/)
+* Added missing semicolons
 
 ### Browsers
 
