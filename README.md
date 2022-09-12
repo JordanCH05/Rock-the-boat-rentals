@@ -231,9 +231,10 @@ As a store owner I would like to be able to...
 
 ![Add/Edit Review Page](media/review.png)
 
-## Future Features
+## Future Features/Fixes
 
 * Allow admins to generate discount codes for their site instead of having to rely on the admin site
+* Fixed bug by removing empty container that was blocking som buttons
 
 ## Testing
 
