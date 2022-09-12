@@ -191,7 +191,7 @@ As a store owner I would like to be able to...
 
     * The user can also see all reviews they have created on the site and can edit or delete them from this page
 
-![Profile page]()
+![Profile page](media/profile.png)
 
 * Bag
 
@@ -234,7 +234,7 @@ As a store owner I would like to be able to...
 ## Future Features/Fixes
 
 * Allow admins to generate discount codes for their site instead of having to rely on the admin site
-* Fixed bug by removing empty container that was blocking som buttons
+* Fixed bug by removing empty container that was blocking some buttons
 
 ## Testing
 
