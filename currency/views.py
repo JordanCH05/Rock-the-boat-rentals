@@ -17,13 +17,19 @@ def change_currency(request, currency, redirect_url=''):
     else:
         currencies = []
         filt_cur = Currency.objects.values()
-        for cur in filt_cur:
-            currencies.append(cur['code'])
-        if currency in currencies:
-            request.session['currency'] = currency
-            messages.success(request, f"Currency changed to {currency}")
-            return redirect(reverse('products'))
+        if filt_cur:
+            for cur in filt_cur:
+                currencies.append(cur['code'])
+            if currency in currencies:
+                request.session['currency'] = currency
+                messages.success(request, f"Currency changed to {currency}")
+                return redirect(reverse('products'))
+            else:
+                messages.error(request,
+                            f"Sorry, we don't use this currency: {currency}")
+                return redirect(reverse('products'))
         else:
-            messages.error(request,
-                           f"Sorry, we don't use this currency: {currency}")
+            messages.warning(
+            request,
+            "Changing currencies is not available at the moment")
             return redirect(reverse('products'))
