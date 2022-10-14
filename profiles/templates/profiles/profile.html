@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
+{% load currency %}
 {% load divide %}
+{% load humanize %}
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
@@ -67,10 +69,11 @@
                                             {% endfor %}
                                         </ul>
                                     </td>
-                                    {% if order.currnecy in suffix_cur %}
-                                        <td>{{ order.grand_total }} {{ order.currency.symbol }}</td>
+                                    {% multiply order.grand_total order.currency.factor as grand_total %}
+                                    {% if order.currency in suffix_cur %}
+                                        <td>{{ grand_total|floatformat:"2"|intcomma }} {{ order.currency.symbol }}</td>
                                     {% else %}
-                                        <td>{{ order.currency.symbol }}{{ order.grand_total }}</td>
+                                        <td>{{ order.currency.symbol }}{{ grand_total|floatformat:"2"|intcomma }}</td>
                                     {% endif %}
                                     <td>
                                         
