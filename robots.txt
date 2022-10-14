@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: /accouints/
+Disallow: /accounts/
 Disallow: /profile/
 Sitemap: https://rock-the-boat.herokuapp.com/sitemap.xml
