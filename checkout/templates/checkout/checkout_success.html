@@ -70,8 +70,7 @@
                                 {{ item.boat.sku }}
                             </p>
                         </div>
-                        {% divide factor order.currency.factor as converter %}
-                        {% multiply item.boat.price converter as price %}
+                        {% multiply item.boat.price order.currency.factor as price %}
                         {% if order.currency in suffix_cur %}
                         <div class="col-12 col-md-8 text-md-right">
                             <p class="small mb-0">{{ price|floatformat:"2"|intcomma }} {{ order.currency.symbol }}</p>
@@ -174,11 +173,10 @@
                         </div>
                     </div>
 
-                    {% divide factor order.currency.factor as converter %}
-                    {% multiply order.order_total converter as total %}
-                    {% multiply order.delivery_cost converter as delivery_cost %}
-                    {% multiply order.discount converter as discount %}
-                    {% multiply order.grand_total converter as grand_total %}
+                    {% multiply order.order_total order.currency.factor as total %}
+                    {% multiply order.delivery_cost order.currency.factor as delivery_cost %}
+                    {% multiply order.discount order.currency.factor as discount %}
+                    {% multiply order.grand_total order.currency.factor as grand_total %}
                     {% if order.currency.code in suffix_cur %}
                     
 
@@ -196,7 +194,7 @@
                             <p class="mb-0 font-weight-bold">Delivery</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ delivery_cost }} {{ order.currency.symbol }}</p>
+                            <p class="mb-0">{{ delivery_cost|floatformat:2|intcomma }} {{ order.currency.symbol }}</p>
                         </div>
                     </div>
 
@@ -206,7 +204,7 @@
                             <p class="mb-0 font-weight-bold">Discount</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">-{{ discount }} {{ order.currency.symbol }}</p>
+                            <p class="mb-0">-{{ discount|floatformat:2|intcomma }} {{ order.currency.symbol }}</p>
                         </div>
                     </div>
                     {% endif %}
@@ -216,7 +214,7 @@
                             <p class="mb-0 font-weight-bold">Grand Total</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ grand_total }} {{ order.currency.symbol }}</p>
+                            <p class="mb-0">{{ grand_total|floatformat:2|intcomma }} {{ order.currency.symbol }}</p>
                         </div>
                     </div>
 
@@ -227,7 +225,7 @@
                             <p class="mb-0 font-weight-bold">Order Total</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ order.currency.symbol }}{{ total }}</p>
+                            <p class="mb-0">{{ order.currency.symbol }}{{ total|floatformat:2|intcomma }}</p>
                         </div>
                     </div>
 
@@ -236,7 +234,7 @@
                             <p class="mb-0 font-weight-bold">Delivery</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ order.currency.symbol }}{{ delivery_cost }}</p>
+                            <p class="mb-0">{{ order.currency.symbol }}{{ delivery_cost|floatformat:2|intcomma }}</p>
                         </div>
                     </div>
 
@@ -246,7 +244,7 @@
                             <p class="mb-0 font-weight-bold">Discount</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">-{{ order.currency.symbol }}{{ discount }}</p>
+                            <p class="mb-0">-{{ order.currency.symbol }}{{ discount|floatformat:2|intcomma }}</p>
                         </div>
                     </div>
                     {% endif %}
@@ -256,7 +254,7 @@
                             <p class="mb-0 font-weight-bold">Grand Total</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ order.currency.symbol }}{{ grand_total }}</p>
+                            <p class="mb-0">{{ order.currency.symbol }}{{ grand_total|floatformat:2|intcomma }}</p>
                         </div>
                     </div>
 
