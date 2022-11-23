@@ -2,7 +2,7 @@
 
 This website has been created for users to buy and review a selection of RC Boats.
 
-The live site can be found [here](https://rock-the-boat.herokuapp.com/)
+The live site can be found [here](https://rock-the-boat-revival.onrender.com)
 
 ![Responsive Mockup of site](media/mockup.png)
 
